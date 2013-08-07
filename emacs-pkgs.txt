@@ -1,0 +1,13 @@
+emacs-goodies-el 
+emacs-goodies-extra-el
+python-ropemacs
+anything-el
+auto-complete-el
+auto-install-el
+cscope-el
+git-el
+yasnippet
+auctex
+w3m-el-snapshot
+lua-mode
+texinfo
