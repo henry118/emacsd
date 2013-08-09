@@ -11,3 +11,5 @@ auctex
 w3m-el-snapshot
 lua-mode
 texinfo
+# cedet: bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/
+# distel: https://github.com/massemanet/distel.git
