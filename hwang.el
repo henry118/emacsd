@@ -14,16 +14,14 @@
       (add-to-list 'load-path "~/.emacs.d/helm")
       (add-to-list 'load-path "~/.emacs.d/erlmode")
       (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-      (setq exec-path (append exec-path '("/usr/local/bin")))
-      ))
+      (setq exec-path (append exec-path '("/usr/local/bin")))))
 
 ;; color theme
 (if (string-equal system-type "gnu/linux")
     (progn
       (require 'color-theme)
       (color-theme-initialize)
-      (color-theme-clarity)
-      ))
+      (color-theme-clarity)))
 
 ;; cedet
 (load-file "~/.emacs.d/cedet/cedet-devel-load.el")
@@ -91,8 +89,8 @@
 (require 'cmake-mode)
 (require 'gnus)
 (require 'diff-mode-)
-;;(require 'pymacs)
-;;(pymacs-load "ropemacs" "rope-")
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
 (require 'pastebin)
 
 ;; cscope
@@ -145,15 +143,11 @@
   (progn
     (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
     (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
-    (require 'erlmode-start)
-    ))
+    (require 'erlmode-start)))
  ((string-equal system-type "darwin")
-  (require 'erlmode-start)
-  )
+  (require 'erlmode-start))
  ((string-equal system-type "gnu/linux")
-  (require 'erlang-start)
-  )
- )
+  (require 'erlang-start)))
 (require 'distel)
 (distel-setup)
 
@@ -210,10 +204,11 @@
 ;;(add-hook 'jde-mode-hook 'hwang/jde-mode-hook)
 
 ;; python mode hook
-;;(defun hwang/python-mode-hook()
-;;  (local-set-key (kbd "<f6>")  'eassist-list-methods)
-;;)
-;;(add-hook 'python-mode-hook 'hwang/python-mode-hook)
+(defun hwang/python-mode-hook()
+  (local-set-key (kbd "<f6>")  'eassist-list-methods)
+  ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
+  )
+(add-hook 'python-mode-hook 'hwang/python-mode-hook)
 
 ;; Use cperl-mode instead of the default perl-mode
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
