@@ -13,3 +13,5 @@ lua-mode
 texinfo
 # cedet: bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/
 # distel: https://github.com/massemanet/distel.git
+# yasnippet: https://github.com/capitaomorte/yasnippet.git
+# helm: https://github.com/emacs-helm/helm.git
