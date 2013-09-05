@@ -2,14 +2,28 @@
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/cedet")
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib")
-;(add-to-list 'load-path "~/.emacs.d/elib")
-;(add-to-list 'load-path "~/.emacs.d/jdee/lisp")
+;;(add-to-list 'load-path "~/.emacs.d/elib")
+;;(add-to-list 'load-path "~/.emacs.d/jdee/lisp")
 (add-to-list 'load-path "~/.emacs.d/distel/elisp")
 
+;; load path for Mac
+(if (string-equal system-type "darwin")
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/macintosh")
+      (add-to-list 'load-path "~/.emacs.d/yasnippet")
+      (add-to-list 'load-path "~/.emacs.d/helm")
+      (add-to-list 'load-path "~/.emacs.d/erlmode")
+      (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+      (setq exec-path (append exec-path '("/usr/local/bin")))
+      ))
+
 ;; color theme
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-clarity)
+(if (string-equal system-type "gnu/linux")
+    (progn
+      (require 'color-theme)
+      (color-theme-initialize)
+      (color-theme-clarity)
+      ))
 
 ;; cedet
 (load-file "~/.emacs.d/cedet/cedet-devel-load.el")
@@ -19,8 +33,8 @@
 (require 'semantic/bovine/gcc)
 (require 'semantic/ia)
 (require 'eassist)
-;(require 'semantic/decorate/include)
-;(require 'semantic/lex-spp)
+;;(require 'semantic/decorate/include)
+;;(require 'semantic/lex-spp)
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib/")
 (add-to-list 'Info-directory-list "~/.emacs.d/cedet/doc/info")
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
@@ -30,27 +44,41 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
 
 ;; yasnippnet
 (require 'yasnippet)
 (yas/global-mode 1)
 
 ;; anything
-(require 'anything-config)
-(require 'anything-match-plugin)
+(cond
+ ((string-equal system-type "gnu/linux")
+  (progn
+    (require 'anything-config)
+    (require 'anything-match-plugin)))
+ ((string-equal system-type "darwin")
+  (progn
+    (require 'helm-mode)
+    (helm-mode 1)))
+ ((string-equal system-type "windows-nt")
+  (progn
+    (require 'helm-mode)
+    (helm-mode 1))))
 
 ;; auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-;(setq ac-auto-start nil) ; stop complete automatically
-;(global-set-key "\M-/" 'auto-complete)
+;; stop complete automatically for windows
+(if (string-equal system-type "windows-nt")
+    (progn
+      (setq ac-auto-start nil)
+      (global-set-key "\M-/" 'auto-complete)))
 
 ;; enhanced dired
 (require 'dired+)
-;(toggle-dired-find-file-reuse-dir 1)
+;;(toggle-dired-find-file-reuse-dir 1)
 
 ;; enhanced buffer menu
 (require 'buff-menu+)
@@ -59,12 +87,12 @@
 (load "~/.emacs.d/nxml-mode/rng-auto.el")
 
 ;; required packages
-;(require 'jde)
+;;(require 'jde)
 (require 'cmake-mode)
 (require 'gnus)
 (require 'diff-mode-)
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
+;;(require 'pymacs)
+;;(pymacs-load "ropemacs" "rope-")
 (require 'pastebin)
 
 ;; cscope
@@ -94,7 +122,7 @@
  '(show-paren-mode t)
  '(which-function-mode t)
  '(pastebin-api-dev-key "Your-Pastebin-Dev-Key-Here")
-)
+ )
 
 ;; auto c++ mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
@@ -112,14 +140,25 @@
 (add-to-list 'auto-mode-alist '("\\.clp\\'" . clips-mode))
 
 ;; erlang mode
-;(setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
-;(setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
-(require 'erlang-start)
+(cond
+ ((string-equal system-type "windows-nt")
+  (progn
+    (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
+    (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
+    (require 'erlmode-start)
+    ))
+ ((string-equal system-type "darwin")
+  (require 'erlmode-start)
+  )
+ ((string-equal system-type "gnu/linux")
+  (require 'erlang-start)
+  )
+ )
 (require 'distel)
 (distel-setup)
 
 ;; Templates
-;(template-initialize)
+;;(template-initialize)
 
 ;; Automatically remove trailing spaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -132,8 +171,8 @@
   (setq ac-sources (append '(ac-source-semantic) ac-sources))
   (local-set-key [s-mouse-1]   'semantic-ia-fast-mouse-jump)
   (local-set-key [s-mouse-3]   'semantic-mrub-switch-tags)
-  ;(local-set-key (kbd ".")     'semantic-complete-self-insert)
-  ;(local-set-key (kbd ">")     'semantic-complete-self-insert)
+  ;;(local-set-key (kbd ".")     'semantic-complete-self-insert)
+  ;;(local-set-key (kbd ">")     'semantic-complete-self-insert)
   (local-set-key (kbd "C-c l") 'semantic-ia-complete-symbol-menu)
   (local-set-key (kbd "C-c ?") 'semantic-ia-complete-symbol)
   (local-set-key (kbd "C-c >") 'semantic-complete-analyze-inline)
@@ -155,26 +194,26 @@
   (local-set-key (kbd "M-,")   'cscope-pop-mark)
   (local-set-key (kbd "C-.")   'cscope-find-functions-calling-this-function)
   (local-set-key (kbd "C-,")   'cscope-find-this-symbol)
-)
+  )
 (add-hook 'c-mode-common-hook 'hwang/cmode-hook)
 
 ;; my Java hook
-;(defun hwang/jde-mode-hook()
-;  (local-set-key (kbd "M-.")   'jde-complete-menu)
-;  (local-set-key (kbd "<f3>")  'jde-find)
-;  (local-set-key (kbd "<f4>")  'jde-find-class-source)
-;  (local-set-key (kbd "<f5>")  'eassist-switch-h-cpp)
-;  (local-set-key (kbd "<f6>")  'eassist-list-methods)
-;  (local-set-key (kbd "<f7>")  'jde-set-global-classpath)
-;  (local-set-key (kbd "<f8>")  'jde-compile)
-;)
-;(add-hook 'jde-mode-hook 'hwang/jde-mode-hook)
+;;(defun hwang/jde-mode-hook()
+;;  (local-set-key (kbd "M-.")   'jde-complete-menu)
+;;  (local-set-key (kbd "<f3>")  'jde-find)
+;;  (local-set-key (kbd "<f4>")  'jde-find-class-source)
+;;  (local-set-key (kbd "<f5>")  'eassist-switch-h-cpp)
+;;  (local-set-key (kbd "<f6>")  'eassist-list-methods)
+;;  (local-set-key (kbd "<f7>")  'jde-set-global-classpath)
+;;  (local-set-key (kbd "<f8>")  'jde-compile)
+;;)
+;;(add-hook 'jde-mode-hook 'hwang/jde-mode-hook)
 
 ;; python mode hook
-(defun hwang/python-mode-hook()
-  (local-set-key (kbd "<f6>")  'eassist-list-methods)
-)
-(add-hook 'python-mode-hook 'hwang/python-mode-hook)
+;;(defun hwang/python-mode-hook()
+;;  (local-set-key (kbd "<f6>")  'eassist-list-methods)
+;;)
+;;(add-hook 'python-mode-hook 'hwang/python-mode-hook)
 
 ;; Use cperl-mode instead of the default perl-mode
 (add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
@@ -201,15 +240,16 @@
             ))
 
 ;; Erlang hook
-(add-hook 'erlang-mode-hook
-          (lambda ()
-	    ;; when starting an Erlang shell in Emacs, default in the node name
-	    (setq inferior-erlang-machine-options '("-sname" "emacs"))
-	    ;; add Erlang functions to an imenu menu
-	    (imenu-add-to-menubar "Imenu")))
+(add-hook
+ 'erlang-mode-hook
+ (lambda ()
+   ;; when starting an Erlang shell in Emacs, default in the node name
+   (setq inferior-erlang-machine-options '("-sname" "emacs"))
+   ;; add Erlang functions to an imenu menu
+   (imenu-add-to-menubar "Imenu")))
 
 ;; Font
-;(custom-set-faces '(default ((t (:height 110 :family "monospace")))))
+;;(custom-set-faces '(default ((t (:height 110 :family "monospace")))))
 
 ;; project
-;(ede-cpp-root-project "test" :file "~/work/test/CMakeLists.txt")
+;;(ede-cpp-root-project "test" :file "~/work/test/CMakeLists.txt")

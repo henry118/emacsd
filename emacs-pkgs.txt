@@ -15,3 +15,4 @@ texinfo
 # distel: https://github.com/massemanet/distel.git
 # yasnippet: https://github.com/capitaomorte/yasnippet.git
 # helm: https://github.com/emacs-helm/helm.git
+# erlmode: https://github.com/rost/erlmode.git
