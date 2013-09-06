@@ -15,7 +15,7 @@
 ;;
 ;; * Mac & Windows:
 ;;  Put the following package (in source form) in the emacsd directory:
-;;  $ git clone yasnippet: https://github.com/capitaomorte/yasnippet.git
+;;  $ git clone https://github.com/capitaomorte/yasnippet.git
 ;;  $ git clone https://github.com/emacs-helm/helm.git
 ;;  $ git clone https://github.com/rost/erlmode.git
 ;;
