@@ -241,29 +241,28 @@
 
 ;;----------------------------------------------------------------------------------
 ;; Erlang mode setup
+;; Disable it for now, it causes CPerlMode misbehave
 ;;----------------------------------------------------------------------------------
-(cond
- ((string-equal system-type "windows-nt")
-  (progn
-    (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
-    (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
-    (require 'erlang-start)))
- ((string-equal system-type "darwin")
-  (require 'erlmode-start))
- ((string-equal system-type "gnu/linux")
-  (require 'erlang-start))
- ((string-equal system-type "cygwin")
-  (require 'erlmode-start)))
-(require 'distel)
-(distel-setup)
+;; (cond
+;;  ((string-equal system-type "windows-nt")
+;;   (progn
+;;     (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
+;;     (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
+;;     (require 'erlang-start)))
+;;  ((string-equal system-type "darwin")
+;;   (require 'erlmode-start))
+;;  ((string-equal system-type "gnu/linux")
+;;   (require 'erlang-start))
+;;  ((string-equal system-type "cygwin")
+;;   (require 'erlmode-start)))
+;; (require 'distel)
+;; (distel-setup)
 
-(defun hwang/erlang-hook()
-  ;; when starting an Erlang shell in Emacs, the node name by default should be "emacs"
-  (setq inferior-erlang-machine-options '("-sname" "emacs"))
-  ;; add Erlang functions to an imenu menu
-  (imenu-add-to-menubar "Imenu")
-  )
-(add-hook 'erlang-mode-hook 'hwang/erlang-hook)
+;; (defun hwang/erlang-hook()
+;;   (setq inferior-erlang-machine-options '("-sname" "emacs"))
+;;   (imenu-add-to-menubar "Imenu")
+;;   )
+;; (add-hook 'erlang-mode-hook 'hwang/erlang-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Set up auto modes
