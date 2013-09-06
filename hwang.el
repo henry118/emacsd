@@ -12,7 +12,7 @@
 ;;  auto-complete-el, auto-install-el, cscope-el, git-el, yasnippet, auctex
 ;;  w3m-el-snapshot, lua-mode, texinfo
 ;;
-;; * Mac
+;; * Mac or Cygwin
 ;;  $ git clone https://github.com/rost/erlmode.git
 ;;  $ git clone https://github.com/capitaomorte/yasnippet.git
 ;;  $ git clone https://github.com/emacs-helm/helm.git
@@ -48,7 +48,13 @@
     (add-to-list 'load-path "~/.emacs.d/windows")
     (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
     (setenv "PATH" (concat (getenv "PATH") ";C:/cygwin/usr/local/bin;C:/cygwin/bin"))
-    (setq exec-path (append exec-path '("C:/cygwin/usr/local/bin"))))))
+    (setq exec-path (append exec-path '("C:/cygwin/usr/local/bin")))))
+ ((string-equal system-type "cygwin")
+  (progn
+    (add-to-list 'load-path "~/.emacs.d/windows")
+    (add-to-list 'load-path "~/.emacs.d/yasnippet")
+    (add-to-list 'load-path "~/.emacs.d/helm")
+    (add-to-list 'load-path "~/.emacs.d/erlmode"))))
 
 ;;---------------------------------------------------------------------------------
 ;; setup cygwin for windows
@@ -110,9 +116,9 @@
   (progn
     (require 'anything-config)
     (require 'anything-match-plugin)))
- ((string-equal system-type "darwin")
+ ((or (string-equal system-type "darwin") (string-equal system-type "cygwin"))
   (progn
-    (require 'helm-mode)
+   (require 'helm-mode)
     (helm-mode 1))))
 
 ;;----------------------------------------------------------------------------------
@@ -202,7 +208,7 @@
   (progn
     (require 'pymacs)
     (pymacs-load "ropemacs" "rope-")))
- ((string-equal system-type "windows-nt")
+ ((or (string-equal system-type "windows-nt") (string-equal system-type "cygwin"))
   (require 'python-mode)))
 
 (defun hwang/python-mode-hook()
@@ -245,7 +251,9 @@
  ((string-equal system-type "darwin")
   (require 'erlmode-start))
  ((string-equal system-type "gnu/linux")
-  (require 'erlang-start)))
+  (require 'erlang-start))
+ ((string-equal system-type "cygwin")
+  (require 'erlmode-start)))
 (require 'distel)
 (distel-setup)
 
