@@ -102,7 +102,7 @@
 ;; yasnippnet
 ;;---------------------------------------------------------------------------------
 (require 'yasnippet)
-(yas/global-mode 1)
+;(yas/global-mode 1)
 
 ;;---------------------------------------------------------------------------------
 ;; anything/helm
@@ -113,10 +113,6 @@
     (require 'anything-config)
     (require 'anything-match-plugin)))
  ((string-equal system-type "darwin")
-  (progn
-    (require 'helm-mode)
-    (helm-mode 1)))
- ((string-equal system-type "windows-nt")
   (progn
     (require 'helm-mode)
     (helm-mode 1))))
