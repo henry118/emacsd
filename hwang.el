@@ -1,4 +1,33 @@
+;;================================================================================
+;;
+;;  My personal Emacs configuration
+;;
+;;  Author: Henry Wang <henry118@gmail.com>
+;;
+;;  Comments: For this script to work, some additional
+;;        need to be installed on the system.
+;;
+;; * GNU/Linux (Debian in my case):
+;;  Try to install the following packages:
+;;  emacs-goodies-el, emacs-goodies-extra-el, python-ropemacs, anything-el,
+;;  auto-complete-el, auto-install-el, cscope-el, git-el, yasnippet, auctex
+;;  w3m-el-snapshot, lua-mode, texinfo
+;;
+;; * Mac & Windows:
+;;  Put the following package (in source form) in the emacsd directory:
+;;  $ git clone yasnippet: https://github.com/capitaomorte/yasnippet.git
+;;  $ git clone https://github.com/emacs-helm/helm.git
+;;  $ git clone https://github.com/rost/erlmode.git
+;;
+;; Finally, all platforms need the following packages:
+;;  $ bzr co bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/ cedet
+;;  $ git clone https://github.com/massemanet/distel.git
+;;
+;;=================================================================================
+
+;;---------------------------------------------------------------------------------
 ;; load paths
+;;---------------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/cedet")
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib")
@@ -6,24 +35,47 @@
 ;;(add-to-list 'load-path "~/.emacs.d/jdee/lisp")
 (add-to-list 'load-path "~/.emacs.d/distel/elisp")
 
-;; load path for Mac
-(if (string-equal system-type "darwin")
-    (progn
-      (add-to-list 'load-path "~/.emacs.d/macintosh")
-      (add-to-list 'load-path "~/.emacs.d/yasnippet")
-      (add-to-list 'load-path "~/.emacs.d/helm")
-      (add-to-list 'load-path "~/.emacs.d/erlmode")
-      (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-      (setq exec-path (append exec-path '("/usr/local/bin")))))
+;; load path for specific platforms
+(cond
+ ((string-equal system-type "darwin")
+  (progn
+    (add-to-list 'load-path "~/.emacs.d/macintosh")
+    (add-to-list 'load-path "~/.emacs.d/yasnippet")
+    (add-to-list 'load-path "~/.emacs.d/helm")
+    (add-to-list 'load-path "~/.emacs.d/erlmode")
+    (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+    (setq exec-path (append exec-path '("/usr/local/bin")))))
+ ((string-equal system-type "windows-nt")
+  (progn
+    (add-to-list 'load-path "~/.emacs.d/windows")
+    (add-to-list 'load-path "~/.emacs.d/yasnippet")
+    (add-to-list 'load-path "~/.emacs.d/helm")
+    (add-to-list 'load-path "~/.emacs.d/erlmode")
+    (setenv "PATH" (concat (getenv "PATH") ";C:/cygwin/usr/local/bin;C:/cygwin/bin"))
+    (setq exec-path (append exec-path '("C:/cygwin/usr/local/bin"))))))
 
+;;---------------------------------------------------------------------------------
+;; setup cygwin for windows
+;;---------------------------------------------------------------------------------
+(if (string-equal system-type "windows-nt")
+    (progn
+      (require 'cygwin-mount)
+      (setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
+      (cygwin-mount-activate)
+      (require 'setup-cygwin)))
+
+;;---------------------------------------------------------------------------------
 ;; color theme
+;;---------------------------------------------------------------------------------
 (if (string-equal system-type "gnu/linux")
     (progn
       (require 'color-theme)
       (color-theme-initialize)
       (color-theme-clarity)))
 
+;;---------------------------------------------------------------------------------
 ;; cedet
+;;---------------------------------------------------------------------------------
 (load-file "~/.emacs.d/cedet/cedet-devel-load.el")
 (semantic-mode 1)
 (require 'semantic/bovine/c)
@@ -46,11 +98,15 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
 ;;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
 
+;;---------------------------------------------------------------------------------
 ;; yasnippnet
+;;---------------------------------------------------------------------------------
 (require 'yasnippet)
 (yas/global-mode 1)
 
-;; anything
+;;---------------------------------------------------------------------------------
+;; anything/helm
+;;---------------------------------------------------------------------------------
 (cond
  ((string-equal system-type "gnu/linux")
   (progn
@@ -65,7 +121,9 @@
     (require 'helm-mode)
     (helm-mode 1))))
 
+;;----------------------------------------------------------------------------------
 ;; auto-complete
+;;----------------------------------------------------------------------------------
 (require 'auto-complete-config)
 (ac-config-default)
 ;; stop complete automatically for windows
@@ -74,93 +132,30 @@
       (setq ac-auto-start nil)
       (global-set-key "\M-/" 'auto-complete)))
 
-;; enhanced dired
-(require 'dired+)
-;;(toggle-dired-find-file-reuse-dir 1)
-
-;; enhanced buffer menu
-(require 'buff-menu+)
-
-;; nXML
-(load "~/.emacs.d/nxml-mode/rng-auto.el")
-
-;; required packages
-;;(require 'jde)
-(require 'cmake-mode)
-(require 'gnus)
-(require 'diff-mode-)
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
-(require 'pastebin)
-
+;;----------------------------------------------------------------------------------
 ;; cscope
+;;----------------------------------------------------------------------------------
 (require 'xcscope)
 (setq cscope-do-not-update-database t)
-
-;; turn on cscope semanticdb backend
 (require 'semantic/db-cscope)
 (semanticdb-enable-cscope-databases nil)
 
-;; variables
-(custom-set-variables
- '(browse-url-browser-function (quote w3m-browse-url))
- '(c-basic-offset 4)
- '(c-offsets-alist (quote ((substatement-open . 0) (case-label . +) (innamespace . 0) (arglist-intro . +) (arglist-close . 0))))
- '(cua-mode t nil (cua-base))
- '(display-time-day-and-date t)
- '(display-time-mode t)
- '(gdb-find-source-frame t)
- '(gdb-many-windows t)
- '(gdb-show-main t)
- '(gdb-speedbar-auto-raise t)
- '(gdb-use-separate-io-buffer t)
- '(global-linum-mode t)
- '(indent-tabs-mode nil)
- '(make-backup-files nil)
- '(show-paren-mode t)
- '(which-function-mode t)
- '(pastebin-api-dev-key "Your-Pastebin-Dev-Key-Here")
- )
-
-;; auto c++ mode
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
-
-;; CMake
-(setq auto-mode-alist (append '(("CMakeLists\\.txt\\'" . cmake-mode) ("\\.cmake\\'" . cmake-mode)) auto-mode-alist))
-
-;; XML mode
-(setq auto-mode-alist (cons '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|xsd\\)\\'" . nxml-mode) auto-mode-alist))
-
-;; CLIPS mode
+;;----------------------------------------------------------------------------------
+;; Other packages
+;;----------------------------------------------------------------------------------
+(require 'dired+)
+(require 'buff-menu+)
+(require 'cmake-mode)
+(require 'gnus)
+(require 'diff-mode-)
+(require 'pastebin)
 (require 'clips-mode)
-(add-to-list 'auto-mode-alist '("\\.clp\\'" . clips-mode))
+;;(require 'jde)
+(load "~/.emacs.d/nxml-mode/rng-auto.el") ; for nxml
 
-;; erlang mode
-(cond
- ((string-equal system-type "windows-nt")
-  (progn
-    (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
-    (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
-    (require 'erlmode-start)))
- ((string-equal system-type "darwin")
-  (require 'erlmode-start))
- ((string-equal system-type "gnu/linux")
-  (require 'erlang-start)))
-(require 'distel)
-(distel-setup)
-
-;; Templates
-;;(template-initialize)
-
-;; Automatically remove trailing spaces
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;; Quick window switch
-(windmove-default-keybindings 'meta)
-
-;; my c-mode hook
+;;----------------------------------------------------------------------------------
+;; C Mode setup
+;;----------------------------------------------------------------------------------
 (defun hwang/cmode-hook()
   (setq ac-sources (append '(ac-source-semantic) ac-sources))
   (local-set-key [s-mouse-1]   'semantic-ia-fast-mouse-jump)
@@ -191,7 +186,9 @@
   )
 (add-hook 'c-mode-common-hook 'hwang/cmode-hook)
 
-;; my Java hook
+;;----------------------------------------------------------------------------------
+;; Java mode setup
+;;----------------------------------------------------------------------------------
 ;;(defun hwang/jde-mode-hook()
 ;;  (local-set-key (kbd "M-.")   'jde-complete-menu)
 ;;  (local-set-key (kbd "<f3>")  'jde-find)
@@ -203,18 +200,26 @@
 ;;)
 ;;(add-hook 'jde-mode-hook 'hwang/jde-mode-hook)
 
-;; python mode hook
+;;----------------------------------------------------------------------------------
+;; Python mode setup
+;;----------------------------------------------------------------------------------
+(cond
+ ((or (string-equal system-type "gnu/linux") (string-equal system-type "darwin"))
+  (progn
+    (require 'pymacs)
+    (pymacs-load "ropemacs" "rope-")))
+ ((string-equal system-type "windows-nt")
+  (require 'python-mode)))
+
 (defun hwang/python-mode-hook()
   (local-set-key (kbd "<f6>")  'eassist-list-methods)
   ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
   )
 (add-hook 'python-mode-hook 'hwang/python-mode-hook)
 
-;; Use cperl-mode instead of the default perl-mode
-(add-to-list 'auto-mode-alist '("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
+;;----------------------------------------------------------------------------------
+;; Perl mode setup
+;;----------------------------------------------------------------------------------
 (add-hook 'cperl-mode-hook
           (lambda()
             (require 'perl-completion)
@@ -222,29 +227,105 @@
             (local-set-key (kbd "<f6>")  'eassist-list-methods)
 	    ))
 
-;; Makefile hook
+;;----------------------------------------------------------------------------------
+;; Makefile mode setup
+;;----------------------------------------------------------------------------------
 (add-hook 'GNUmakefile-mode-hook
           (lambda()
             (setq indent-tabs-mode t)
             ))
-
-;; Makefile.config hook
 (add-hook 'conf-mode-hook
           (lambda()
             (setq indent-tabs-mode t)
             ))
 
-;; Erlang hook
-(add-hook
- 'erlang-mode-hook
- (lambda ()
-   ;; when starting an Erlang shell in Emacs, default in the node name
-   (setq inferior-erlang-machine-options '("-sname" "emacs"))
-   ;; add Erlang functions to an imenu menu
-   (imenu-add-to-menubar "Imenu")))
+;;----------------------------------------------------------------------------------
+;; Erlang mode setup
+;;----------------------------------------------------------------------------------
+(cond
+ ((string-equal system-type "windows-nt")
+  (progn
+    (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
+    (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
+    (require 'erlmode-start)))
+ ((string-equal system-type "darwin")
+  (require 'erlmode-start))
+ ((string-equal system-type "gnu/linux")
+  (require 'erlang-start)))
+(require 'distel)
+(distel-setup)
 
-;; Font
-;;(custom-set-faces '(default ((t (:height 110 :family "monospace")))))
+(defun hwang/erlang-hook()
+  ;; when starting an Erlang shell in Emacs, the node name by default should be "emacs"
+  (setq inferior-erlang-machine-options '("-sname" "emacs"))
+  ;; add Erlang functions to an imenu menu
+  (imenu-add-to-menubar "Imenu")
+  )
+(add-hook 'erlang-mode-hook 'hwang/erlang-hook)
 
-;; project
+;;----------------------------------------------------------------------------------
+;; Set up auto modes
+;;----------------------------------------------------------------------------------
+(setq auto-mode-alist
+      (append
+       '(("CMakeLists\\.txt\\'" . cmake-mode)
+         ("\\.cmake\\'" . cmake-mode)
+         ("\\.h\\'" . c++-mode)
+         ("\\.ipp\\'" . c++-mode)
+         ("\\.tcc\\'" . c++-mode)
+         ("\\.tmh\\'" . c++-mode)
+         ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
+         ("\\.lua\\'" . lua-mode)
+         ("\\.clp\\'" . clips-mode)
+         ("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|xsd\\)\\'" . nxml-mode)
+         ) auto-mode-alist))
+(setq interpreter-mode-alist
+      (append
+       '(("perl" . cperl-mode)
+         ("perl5" . cperl-mode)
+         ("miniperl" . cperl-mode)
+         ("lua" . lua-mode)
+         ) interpreter-mode-alist))
+
+;;----------------------------------------------------------------------------------
+;; general variables
+;;----------------------------------------------------------------------------------
+(custom-set-variables
+ '(browse-url-browser-function (quote w3m-browse-url))
+ '(c-basic-offset 4)
+ '(c-offsets-alist (quote ((substatement-open . 0) (case-label . +) (innamespace . 0) (arglist-intro . +) (arglist-close . 0))))
+ '(cua-mode t nil (cua-base))
+ '(display-time-day-and-date t)
+ '(display-time-mode t)
+ '(gdb-find-source-frame t)
+ '(gdb-many-windows t)
+ '(gdb-show-main t)
+ '(gdb-speedbar-auto-raise t)
+ '(gdb-use-separate-io-buffer t)
+ '(global-linum-mode t)
+ '(indent-tabs-mode nil)
+ '(make-backup-files nil)
+ '(show-paren-mode t)
+ '(which-function-mode t)
+ '(pastebin-api-dev-key "Your-Pastebin-Dev-Key-Here")
+ )
+
+;;----------------------------------------------------------------------------------
+;; Minor tweaks
+;;----------------------------------------------------------------------------------
+;; Automatically remove trailing spaces
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; Quick window switch
+(windmove-default-keybindings 'meta)
+
+;;----------------------------------------------------------------------------------
+;; Font setup
+;;----------------------------------------------------------------------------------
+(cond
+ ((string-equal system-type "windows-nt")
+  (custom-set-faces '(default ((t (:height 110 :family "Ubuntu Mono")))))))
+
+;;----------------------------------------------------------------------------------
+;; Projects
+;;----------------------------------------------------------------------------------
 ;;(ede-cpp-root-project "test" :file "~/work/test/CMakeLists.txt")
