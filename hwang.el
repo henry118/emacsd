@@ -212,7 +212,7 @@
   (require 'python-mode)))
 
 (defun hwang/python-mode-hook()
-  (local-set-key (kbd "<f6>")  'eassist-list-methods)
+  (local-set-key (kbd "M-m")  'eassist-list-methods)
   ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
   )
 (add-hook 'python-mode-hook 'hwang/python-mode-hook)
@@ -224,7 +224,7 @@
           (lambda()
             (require 'perl-completion)
             (perl-completion-mode t)
-            (local-set-key (kbd "<f6>")  'eassist-list-methods)
+            (local-set-key (kbd "M-m")  'eassist-list-methods)
 	    ))
 
 ;;----------------------------------------------------------------------------------
