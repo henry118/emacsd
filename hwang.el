@@ -7,17 +7,15 @@
 ;;  Comments: For this script to work, some additional
 ;;        need to be installed on the system.
 ;;
-;; * GNU/Linux (Debian in my case):
-;;  Try to install the following packages:
+;; * GNU/Linux (Debian in my case), try to install the following packages:
 ;;  emacs-goodies-el, emacs-goodies-extra-el, python-ropemacs, anything-el,
 ;;  auto-complete-el, auto-install-el, cscope-el, git-el, yasnippet, auctex
 ;;  w3m-el-snapshot, lua-mode, texinfo
 ;;
-;; * Mac & Windows:
-;;  Put the following package (in source form) in the emacsd directory:
+;; * Mac
+;;  $ git clone https://github.com/rost/erlmode.git
 ;;  $ git clone https://github.com/capitaomorte/yasnippet.git
 ;;  $ git clone https://github.com/emacs-helm/helm.git
-;;  $ git clone https://github.com/rost/erlmode.git
 ;;
 ;; Finally, all platforms need the following packages:
 ;;  $ bzr co bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/ cedet
@@ -48,9 +46,7 @@
  ((string-equal system-type "windows-nt")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/yasnippet")
-    (add-to-list 'load-path "~/.emacs.d/helm")
-    (add-to-list 'load-path "~/.emacs.d/erlmode")
+    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
     (setenv "PATH" (concat (getenv "PATH") ";C:/cygwin/usr/local/bin;C:/cygwin/bin"))
     (setq exec-path (append exec-path '("C:/cygwin/usr/local/bin"))))))
 
@@ -101,8 +97,10 @@
 ;;---------------------------------------------------------------------------------
 ;; yasnippnet
 ;;---------------------------------------------------------------------------------
-(require 'yasnippet)
-;(yas/global-mode 1)
+(if (not (string-equal system-type "windows-nt"))
+    (progn
+      (require 'yasnippet)
+      (yas/global-mode 1)))
 
 ;;---------------------------------------------------------------------------------
 ;; anything/helm
@@ -243,7 +241,7 @@
   (progn
     (setq erlang-root-dir "C:/Program Files (x86)/erl5.9.2")
     (setq exec-path (cons "C:/Program Files (x86)/erl5.9.2/bin" exec-path))
-    (require 'erlmode-start)))
+    (require 'erlang-start)))
  ((string-equal system-type "darwin")
   (require 'erlmode-start))
  ((string-equal system-type "gnu/linux")
