@@ -68,8 +68,10 @@
 
 ;;---------------------------------------------------------------------------------
 ;; color theme
+;; note that since v24 the built-in deftheme in emacs is pretty good.
+;; so we only need this in old versions
 ;;---------------------------------------------------------------------------------
-(if (string-equal system-type "gnu/linux")
+(if (and (string-equal system-type "gnu/linux") (< emacs-major-version 24))
     (progn
       (require 'color-theme)
       (color-theme-initialize)
