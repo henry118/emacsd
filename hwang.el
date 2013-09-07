@@ -177,7 +177,6 @@
   (local-set-key (kbd "C-c p") 'semantic-analyze-proto-impl-toggle)
   (local-set-key (kbd "C-c f") 'semantic-symref)
   (local-set-key (kbd "C-c v") 'semantic-symref-symbol)
-  (local-set-key (kbd "C-c r") 'semantic-tag-folding-fold-all)
   (local-set-key (kbd "<f4>")  'semantic-complete-jump)
   (local-set-key (kbd "M-o")   'eassist-switch-h-cpp)
   (local-set-key (kbd "M-m")   'eassist-list-methods)
@@ -216,8 +215,8 @@
   (require 'python-mode)))
 
 (defun hwang/python-mode-hook()
-  (local-set-key (kbd "M-m")  'eassist-list-methods)
-  ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
+  (local-set-key (kbd "M-m") 'eassist-list-methods)
+  (add-to-list 'ac-sources 'ac-source-ropemacs)
   )
 (add-hook 'python-mode-hook 'hwang/python-mode-hook)
 
