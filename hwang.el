@@ -101,7 +101,7 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-tag-folding-mode)
+;;(add-to-list 'semantic-default-submodes 'global-semantic-tag-folding-mode)
 (semantic-mode 1)
 
 ;;---------------------------------------------------------------------------------
@@ -161,6 +161,7 @@
 ;; C Mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang/cmode-hook()
+  (hs-minor-mode t)
   (setq ac-sources (append '(ac-source-semantic) ac-sources))
   (local-set-key [s-mouse-1]   'semantic-ia-fast-mouse-jump)
   (local-set-key [s-mouse-3]   'semantic-mrub-switch-tags)
@@ -215,6 +216,7 @@
   (require 'python-mode)))
 
 (defun hwang/python-mode-hook()
+  (hs-minor-mode t)
   (local-set-key (kbd "M-m") 'eassist-list-methods)
   ;;This source is too slow
   ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
