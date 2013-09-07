@@ -216,7 +216,8 @@
 
 (defun hwang/python-mode-hook()
   (local-set-key (kbd "M-m") 'eassist-list-methods)
-  (add-to-list 'ac-sources 'ac-source-ropemacs)
+  ;;This source is too slow
+  ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
   )
 (add-hook 'python-mode-hook 'hwang/python-mode-hook)
 
