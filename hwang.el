@@ -79,7 +79,6 @@
 ;; cedet
 ;;---------------------------------------------------------------------------------
 (load-file "~/.emacs.d/cedet/cedet-devel-load.el")
-(semantic-mode 1)
 (require 'semantic/bovine/c)
 (require 'semantic/bovine/clang)
 (require 'semantic/bovine/gcc)
@@ -91,14 +90,19 @@
 (add-to-list 'Info-directory-list "~/.emacs.d/cedet/doc/info")
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-tag-folding-mode)
+(semantic-mode 1)
 
 ;;---------------------------------------------------------------------------------
 ;; yasnippnet
