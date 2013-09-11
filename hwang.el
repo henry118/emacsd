@@ -104,6 +104,14 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
 ;;(add-to-list 'semantic-default-submodes 'global-semantic-tag-folding-mode)
+
+;; Add header directories of 3rd party libraries
+(cond
+ ((string-equal system-type "darwin")
+  (progn
+    (semantic-add-system-include "/usr/local/include/boost" 'c++-mode))))
+
+;; Now turn on semantic
 (semantic-mode 1)
 
 ;;---------------------------------------------------------------------------------
