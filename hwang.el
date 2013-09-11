@@ -132,6 +132,7 @@
 ;;----------------------------------------------------------------------------------
 (require 'auto-complete-config)
 (ac-config-default)
+(add-to-list 'ac-modes 'cmake-mode)
 ;; stop complete automatically for windows
 (if (string-equal system-type "windows-nt")
     (progn
@@ -151,7 +152,6 @@
 ;;----------------------------------------------------------------------------------
 (require 'dired+)
 (require 'buff-menu+)
-(require 'cmake-mode)
 (require 'gnus)
 (require 'diff-mode-)
 (require 'pastebin)
@@ -271,6 +271,16 @@
 ;;   (imenu-add-to-menubar "Imenu")
 ;;   )
 ;; (add-hook 'erlang-mode-hook 'hwang/erlang-hook)
+
+;;----------------------------------------------------------------------------------
+;; CMake mode setup
+;;----------------------------------------------------------------------------------
+(require 'cmake-mode)
+(defun hwang/cmake-hook()
+  (local-set-key (kbd "C-c l") 'cmake-help-list-commands)
+  (local-set-key (kbd "C-c h") 'cmake-help-command)
+)
+(add-hook 'cmake-mode-hook 'hwang/cmake-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Set up auto modes
