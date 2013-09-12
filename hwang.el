@@ -46,9 +46,7 @@
  ((string-equal system-type "windows-nt")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
-    (setenv "PATH" (concat (getenv "PATH") ";C:/cygwin/usr/local/bin;C:/cygwin/bin"))
-    (setq exec-path (append exec-path '("C:/cygwin/usr/local/bin")))))
+    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")))
  ((string-equal system-type "cygwin")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
