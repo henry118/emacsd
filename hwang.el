@@ -94,25 +94,23 @@
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-tag-folding-mode)
 
 ;; Add header directories of 3rd party libraries
 (cond
- ((string-equal system-type "darwin")
+ ((or (string-equal system-type "darwin") (string-equal system-type "gnu/linux"))
   (progn
     (semantic-add-system-include "/usr/local/include" 'c++-mode)))
  ((string-equal system-type "windows-nt")
   (progn
+    (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+    (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
     (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
     (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
     (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
