@@ -85,9 +85,10 @@
 (require 'semantic/bovine/clang)
 (require 'semantic/bovine/gcc)
 (require 'semantic/ia)
+(require 'semantic/analyze/debug)
+(require 'semantic/decorate/include)
 (require 'eassist)
-;;(require 'semantic/decorate/include)
-;;(require 'semantic/lex-spp)
+
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib/")
 (add-to-list 'Info-directory-list "~/.emacs.d/cedet/doc/info")
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
@@ -109,7 +110,18 @@
 (cond
  ((string-equal system-type "darwin")
   (progn
-    (semantic-add-system-include "/usr/local/include/boost" 'c++-mode))))
+    (semantic-add-system-include "/usr/local/include" 'c++-mode)))
+ ((string-equal system-type "windows-nt")
+  (progn
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
+ ((string-equal system-type "cygwin")
+  (progn
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
+)
 
 ;; Now turn on semantic
 (semantic-mode 1)
