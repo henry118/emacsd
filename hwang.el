@@ -46,9 +46,7 @@
  ((string-equal system-type "windows-nt")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
-    (setenv "PATH" (concat (getenv "PATH") ";C:/cygwin/usr/local/bin;C:/cygwin/bin"))
-    (setq exec-path (append exec-path '("C:/cygwin/usr/local/bin")))))
+    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")))
  ((string-equal system-type "cygwin")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
@@ -85,31 +83,41 @@
 (require 'semantic/bovine/clang)
 (require 'semantic/bovine/gcc)
 (require 'semantic/ia)
+(require 'semantic/analyze/debug)
+(require 'semantic/decorate/include)
 (require 'eassist)
-;;(require 'semantic/decorate/include)
-;;(require 'semantic/lex-spp)
+
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib/")
 (add-to-list 'Info-directory-list "~/.emacs.d/cedet/doc/info")
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-tag-folding-mode)
 
 ;; Add header directories of 3rd party libraries
 (cond
- ((string-equal system-type "darwin")
+ ((or (string-equal system-type "darwin") (string-equal system-type "gnu/linux"))
   (progn
-    (semantic-add-system-include "/usr/local/include/boost" 'c++-mode))))
+    (semantic-add-system-include "/usr/local/include" 'c++-mode)))
+ ((string-equal system-type "windows-nt")
+  (progn
+    (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+    (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
+ ((string-equal system-type "cygwin")
+  (progn
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
+    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
+)
 
 ;; Now turn on semantic
 (semantic-mode 1)
@@ -140,6 +148,7 @@
 ;;----------------------------------------------------------------------------------
 (require 'auto-complete-config)
 (ac-config-default)
+(add-to-list 'ac-modes 'cmake-mode)
 ;; stop complete automatically for windows
 (if (string-equal system-type "windows-nt")
     (progn
@@ -159,7 +168,6 @@
 ;;----------------------------------------------------------------------------------
 (require 'dired+)
 (require 'buff-menu+)
-(require 'cmake-mode)
 (require 'gnus)
 (require 'diff-mode-)
 (require 'pastebin)
@@ -285,6 +293,16 @@
 ;;   (imenu-add-to-menubar "Imenu")
 ;;   )
 ;; (add-hook 'erlang-mode-hook 'hwang/erlang-hook)
+
+;;----------------------------------------------------------------------------------
+;; CMake mode setup
+;;----------------------------------------------------------------------------------
+(require 'cmake-mode)
+(defun hwang/cmake-hook()
+  (local-set-key (kbd "C-c l") 'cmake-help-list-commands)
+  (local-set-key (kbd "C-c h") 'cmake-help-command)
+)
+(add-hook 'cmake-mode-hook 'hwang/cmake-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Set up auto modes
