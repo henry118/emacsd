@@ -221,13 +221,19 @@
  ((or (string-equal system-type "gnu/linux") (string-equal system-type "darwin"))
   (progn
     (require 'pymacs)
-    (pymacs-load "ropemacs" "rope-")))
+    (pymacs-load "ropemacs" "rope-")
+    (setq ropemacs-enable-autoimport t)))
  ((or (string-equal system-type "windows-nt") (string-equal system-type "cygwin"))
   (require 'python-mode)))
 
 (defun hwang/python-mode-hook()
   (hs-minor-mode t)
   (local-set-key (kbd "M-m") 'eassist-list-methods)
+  (if (or (string-equal system-type "gnu/linux") (string-equal system-type "darwin"))
+      (progn
+        (local-set-key (kbd "M-.") 'rope-goto-definition)
+        (local-set-key (kbd "M-,") 'rope-pop-mark)
+        (local-set-key (kbd "C-.") 'rope-find-occurrences)))
   ;;This source is too slow
   ;;(add-to-list 'ac-sources 'ac-source-ropemacs)
   )
