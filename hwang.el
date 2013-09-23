@@ -348,7 +348,7 @@
  '(make-backup-files nil)
  '(show-paren-mode t)
  '(which-function-mode t)
- '(pastebin-api-dev-key "Your-Pastebin-Dev-Key-Here")
+ '(pastebin-api-dev-key (getenv "PASTEBIN_KEY"))
  )
 
 ;;----------------------------------------------------------------------------------

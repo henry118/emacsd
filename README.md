@@ -3,5 +3,7 @@ emacsd
 
 My emacs configurations
 
-Put this line in .emacs file:
+Put the following lines in .emacs file:
+
+(setenv "PASTEBIN_KEY" "pastebin-api-dev-key-here")
 (load "~/.emacs.d/hwang")
