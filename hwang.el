@@ -8,9 +8,9 @@
 ;;        need to be installed on the system.
 ;;
 ;; * GNU/Linux (Debian in my case), try to install the following packages:
-;;  emacs-goodies-el, emacs-goodies-extra-el, python-ropemacs, anything-el,
-;;  auto-complete-el, auto-install-el, cscope-el, git-el, yasnippet, auctex
-;;  w3m-el-snapshot, lua-mode, texinfo
+;;  emacs-goodies-el emacs-goodies-extra-el python-ropemacs anything-el,
+;;  auto-complete-el auto-install-el cscope-el git-el yasnippet auctex
+;;  w3m-el-snapshot lua-mode texinfo gnuplot-doc gnuplot-mode
 ;;
 ;; * Mac or Cygwin
 ;;  $ git clone https://github.com/rost/erlmode.git
