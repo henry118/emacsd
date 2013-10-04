@@ -73,7 +73,8 @@
     (progn
       (require 'color-theme)
       (color-theme-initialize)
-      (color-theme-clarity)))
+      ;(color-theme-clarity)))
+    ))
 
 ;;---------------------------------------------------------------------------------
 ;; cedet
@@ -365,8 +366,9 @@
 (cond
  ((string-equal system-type "windows-nt")
   (custom-set-faces '(default ((t (:height 110 :family "Ubuntu Mono"))))))
- ((string-equal system-type "gnu/linux")
-  (custom-set-faces '(default ((t (:height 120 :family "Ubuntu Mono")))))))
+)
+; ((string-equal system-type "gnu/linux")
+;  (custom-set-faces '(default ((t (:height 120 :family "Ubuntu Mono")))))))
 
 ;;----------------------------------------------------------------------------------
 ;; Projects
