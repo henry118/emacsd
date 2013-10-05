@@ -72,9 +72,7 @@
 (if (and (string-equal system-type "gnu/linux") (< emacs-major-version 24))
     (progn
       (require 'color-theme)
-      (color-theme-initialize)
-      ;(color-theme-clarity)))
-    ))
+      (color-theme-initialize)))
 
 ;;---------------------------------------------------------------------------------
 ;; cedet
@@ -359,17 +357,3 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; Quick window switch
 (windmove-default-keybindings 'meta)
-
-;;----------------------------------------------------------------------------------
-;; Font setup
-;;----------------------------------------------------------------------------------
-(cond
- ((string-equal system-type "windows-nt")
-  (custom-set-faces '(default ((t (:height 110 :family "Ubuntu Mono"))))))
- ((string-equal system-type "gnu/linux")
-  (custom-set-faces '(default ((t (:height 110 :family "Terminus")))))))
-
-;;----------------------------------------------------------------------------------
-;; Projects
-;;----------------------------------------------------------------------------------
-;;(ede-cpp-root-project "test" :file "~/work/test/CMakeLists.txt")
