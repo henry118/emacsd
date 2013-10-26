@@ -65,6 +65,15 @@
       (require 'setup-cygwin)))
 
 ;;---------------------------------------------------------------------------------
+;; setup emacs package system
+;;---------------------------------------------------------------------------------
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
+;;---------------------------------------------------------------------------------
 ;; color theme
 ;; note that since v24 the built-in deftheme in emacs is pretty good.
 ;; so we only need this in old versions
