@@ -14,8 +14,6 @@
 ;;
 ;; * Mac or Cygwin
 ;;  $ git clone https://github.com/rost/erlmode.git
-;;  $ git clone https://github.com/capitaomorte/yasnippet.git
-;;  $ git clone https://github.com/emacs-helm/helm.git
 ;;
 ;; Finally, all platforms need the following packages:
 ;;  $ bzr co bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/ cedet
@@ -67,6 +65,8 @@
 ;;---------------------------------------------------------------------------------
 ;; setup emacs package system
 ;;---------------------------------------------------------------------------------
+(when (< emacs-major-version 24)
+  (add-to-list 'load-path "~/.emacs.d/pm"))
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -141,15 +141,10 @@
 ;;---------------------------------------------------------------------------------
 ;; anything/helm
 ;;---------------------------------------------------------------------------------
-(cond
- ((string-equal system-type "gnu/linux")
+(if (not (string-equal system-type "windows-nt"))
   (progn
     (require 'anything-config)
     (require 'anything-match-plugin)))
- ((or (string-equal system-type "darwin") (string-equal system-type "cygwin"))
-  (progn
-   (require 'helm-mode)
-    (helm-mode 1))))
 
 ;;----------------------------------------------------------------------------------
 ;; auto-complete
