@@ -27,8 +27,6 @@
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/cedet")
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib")
-;;(add-to-list 'load-path "~/.emacs.d/elib")
-;;(add-to-list 'load-path "~/.emacs.d/jdee/lisp")
 (add-to-list 'load-path "~/.emacs.d/distel/elisp")
 
 ;; load path for specific platforms
