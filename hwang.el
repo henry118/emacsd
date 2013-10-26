@@ -175,8 +175,6 @@
 (require 'diff-mode-)
 (require 'pastebin)
 (require 'clips-mode)
-;;(require 'jde)
-(load "~/.emacs.d/nxml-mode/rng-auto.el") ; for nxml
 
 ;;----------------------------------------------------------------------------------
 ;; C Mode setup
