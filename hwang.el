@@ -34,8 +34,6 @@
  ((string-equal system-type "darwin")
   (progn
     (add-to-list 'load-path "~/.emacs.d/macintosh")
-    (add-to-list 'load-path "~/.emacs.d/yasnippet")
-    (add-to-list 'load-path "~/.emacs.d/helm")
     (add-to-list 'load-path "~/.emacs.d/erlmode")
     (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
     (setq exec-path (append exec-path '("/usr/local/bin")))))
@@ -46,8 +44,6 @@
  ((string-equal system-type "cygwin")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/yasnippet")
-    (add-to-list 'load-path "~/.emacs.d/helm")
     (add-to-list 'load-path "~/.emacs.d/erlmode"))))
 
 ;;---------------------------------------------------------------------------------
@@ -131,18 +127,14 @@
 ;;---------------------------------------------------------------------------------
 ;; yasnippnet
 ;;---------------------------------------------------------------------------------
-(if (not (string-equal system-type "windows-nt"))
-    (progn
-      (require 'yasnippet)
-      (yas/global-mode 1)))
+(require 'yasnippet)
+(yas/global-mode 1)
 
 ;;---------------------------------------------------------------------------------
 ;; anything/helm
 ;;---------------------------------------------------------------------------------
-(if (not (string-equal system-type "windows-nt"))
-  (progn
-    (require 'anything-config)
-    (require 'anything-match-plugin)))
+(require 'anything-config)
+(require 'anything-match-plugin)
 
 ;;----------------------------------------------------------------------------------
 ;; auto-complete
@@ -152,9 +144,9 @@
 (add-to-list 'ac-modes 'cmake-mode)
 ;; stop complete automatically for windows
 (if (string-equal system-type "windows-nt")
-    (progn
-      (setq ac-auto-start nil)
-      (global-set-key "\M-/" 'auto-complete)))
+  (progn
+    (setq ac-auto-start nil)
+    (global-set-key "\M-/" 'auto-complete)))
 
 ;;----------------------------------------------------------------------------------
 ;; cscope
@@ -167,9 +159,11 @@
 ;;----------------------------------------------------------------------------------
 ;; ido everywhere
 ;;----------------------------------------------------------------------------------
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+(if (not (string-equal system-type "windows-nt"))
+  (progn
+    (setq ido-enable-flex-matching t)
+    (setq ido-everywhere t)
+    (ido-mode 1)))
 
 ;;----------------------------------------------------------------------------------
 ;; Other packages
