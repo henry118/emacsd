@@ -1,23 +1,12 @@
 ;;================================================================================
 ;;
-;;  My personal Emacs configuration
+;; My personal Emacs configuration
 ;;
-;;  Author: Henry Wang <henry118@gmail.com>
+;; Author: Henry Wang <henry118@gmail.com>
 ;;
-;;  Comments: For this script to work, some additional
-;;        need to be installed on the system.
-;;
-;; * GNU/Linux (Debian in my case), try to install the following packages:
-;;  emacs-goodies-el emacs-goodies-extra-el python-ropemacs anything-el,
-;;  auto-complete-el auto-install-el cscope-el git-el yasnippet auctex
-;;  w3m-el-snapshot lua-mode texinfo gnuplot-doc gnuplot-mode
-;;
-;; * Mac or Cygwin
-;;  $ git clone https://github.com/rost/erlmode.git
-;;
-;; Finally, all platforms need the following packages:
-;;  $ bzr co bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/ cedet
-;;  $ git clone https://github.com/massemanet/distel.git
+;; * I am using the trunk version of CEDET:
+;;   $ bzr co bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/ cedet
+;; * Most other packages can be found in Emacs packages (M-x list-packages)
 ;;
 ;;=================================================================================
 
@@ -159,11 +148,9 @@
 ;;----------------------------------------------------------------------------------
 ;; ido everywhere
 ;;----------------------------------------------------------------------------------
-(if (not (string-equal system-type "windows-nt"))
-  (progn
-    (setq ido-enable-flex-matching t)
-    (setq ido-everywhere t)
-    (ido-mode 1)))
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 ;;----------------------------------------------------------------------------------
 ;; Other packages
