@@ -223,6 +223,7 @@
   (local-set-key (kbd "M-m") 'eassist-list-methods)
   (local-set-key (kbd "M-.") 'jedi:goto-definition)
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)
+  (local-set-key (kbd "C-c d") 'jedi:show-doc)
   )
 (add-hook 'python-mode-hook 'hwang/python-mode-hook)
 
