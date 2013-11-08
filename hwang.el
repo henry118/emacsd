@@ -131,11 +131,8 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (add-to-list 'ac-modes 'cmake-mode)
-;; stop complete automatically for windows
-(if (string-equal system-type "windows-nt")
-  (progn
-    (setq ac-auto-start nil)
-    (global-set-key "\M-/" 'auto-complete)))
+(setq ac-auto-start nil)
+(global-set-key "\M-/" 'auto-complete)
 
 ;;----------------------------------------------------------------------------------
 ;; cscope
@@ -161,6 +158,7 @@
 (require 'diff-mode-)
 (require 'pastebin)
 (require 'clips-mode)
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 
 ;;----------------------------------------------------------------------------------
 ;; C Mode setup
@@ -291,14 +289,12 @@
       (append
        '(("CMakeLists\\.txt\\'" . cmake-mode)
          ("\\.cmake\\'" . cmake-mode)
-         ("\\.h\\'" . c++-mode)
-         ("\\.ipp\\'" . c++-mode)
-         ("\\.tcc\\'" . c++-mode)
-         ("\\.tmh\\'" . c++-mode)
+         ("\\.\\(h\\|ipp\\|tcc\\|tmh\\)\\'" . c++-mode)
          ("\\.\\([pP][Llm]\\|al\\)\\'" . cperl-mode)
          ("\\.lua\\'" . lua-mode)
          ("\\.clp\\'" . clips-mode)
          ("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|xsd\\)\\'" . nxml-mode)
+         ("\\.\\(text\\|markdown\\|md\\)\\'" . markdown-mode)
          ) auto-mode-alist))
 (setq interpreter-mode-alist
       (append
