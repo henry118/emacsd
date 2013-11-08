@@ -283,6 +283,15 @@
 (add-hook 'cmake-mode-hook 'hwang/cmake-hook)
 
 ;;----------------------------------------------------------------------------------
+;; Before Save Hook
+;;----------------------------------------------------------------------------------
+(defun hwang/before-save-hook()
+  (if (not (string-equal mode-name "Markdown"))
+      (delete-trailing-whitespace))
+)
+(add-hook 'before-save-hook 'hwang/before-save-hook)
+
+;;----------------------------------------------------------------------------------
 ;; Set up auto modes
 ;;----------------------------------------------------------------------------------
 (setq auto-mode-alist
@@ -330,7 +339,5 @@
 ;;----------------------------------------------------------------------------------
 ;; Minor tweaks
 ;;----------------------------------------------------------------------------------
-;; Automatically remove trailing spaces
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; Quick window switch
 (windmove-default-keybindings 'meta)
