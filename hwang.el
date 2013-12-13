@@ -169,6 +169,14 @@
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 
 ;;----------------------------------------------------------------------------------
+;; Emacs-Lisp Mode setup
+;;----------------------------------------------------------------------------------
+(defun hwang/elisp-hook()
+  (local-set-key (kbd "M-m")   'eassist-list-methods)
+)
+(add-hook 'emacs-lisp-mode-hook 'hwang/elisp-hook)
+
+;;----------------------------------------------------------------------------------
 ;; C Mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang/cmode-hook()
