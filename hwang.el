@@ -159,6 +159,15 @@
 (setq ecb-tip-of-the-day nil)
 
 ;;----------------------------------------------------------------------------------
+;; EmacsTTS
+;;----------------------------------------------------------------------------------
+(defun emacstts-start()
+  "Load emacstts module"
+  (interactive)
+  (require 'emacstts)
+)
+
+;;----------------------------------------------------------------------------------
 ;; Other packages
 ;;----------------------------------------------------------------------------------
 (require 'dired+)
@@ -167,7 +176,6 @@
 (require 'diff-mode-)
 (require 'pastebin)
 (require 'clips-mode)
-(require 'emacstts)
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 
 ;;----------------------------------------------------------------------------------
