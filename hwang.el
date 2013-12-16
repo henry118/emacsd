@@ -17,6 +17,7 @@
 (add-to-list 'load-path "~/.emacs.d/cedet")
 (add-to-list 'load-path "~/.emacs.d/cedet/contrib")
 (add-to-list 'load-path "~/.emacs.d/distel/elisp")
+(add-to-list 'load-path "~/.emacs.d/emacstts")
 
 ;; load path for specific platforms
 (cond
@@ -166,6 +167,7 @@
 (require 'diff-mode-)
 (require 'pastebin)
 (require 'clips-mode)
+(require 'emacstts)
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 
 ;;----------------------------------------------------------------------------------
