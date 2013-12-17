@@ -105,25 +105,41 @@
 ;; Fix auto complete clang search path, obtain the include path list by:
 ;; $ echo | g++ -v -x c++ -E -
 ;;----------------------------------------------------------------------------------
-(cond
- ((string-equal system-type "gnu/linux")
-  (setq auto-complete-clang-includes "
-/usr/include/c++/4.8
-/usr/include/x86_64-linux-gnu/c++/4.8
-/usr/include/c++/4.8/backward
-/usr/lib/gcc/x86_64-linux-gnu/4.8/include
-/usr/local/include
-/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed
-/usr/include/x86_64-linux-gnu
-/usr/include"))
- ((string-equal system-type "cygwin")
-  (setq auto-complete-clang-includes
-        ""))
+(defun s-trim-left (s)
+  "Remove whitespace at the beginning of S."
+  (if (string-match "\\`[ \t\n\r]+" s)
+      (replace-match "" t t s)
+    s))
+(defun s-trim-right (s)
+  "Remove whitespace at the end of S."
+  (if (string-match "[ \t\n\r]+\\'" s)
+      (replace-match "" t t s)
+    s))
+(defun s-trim (s)
+  "Remove whitespace at the beginning and end of S."
+  (s-trim-left (s-trim-right s)))
+
+(defun g++-include-path ()
+  "Return a list of include paths of g++"
+  (let ((lines) (paths) (found))
+    (setq lines (process-lines "sh" "-c" "echo | g++ -v -x c++ -E -"))
+    (dolist (ln lines)
+      (progn
+        (setq ln (s-trim ln))
+        (cond
+         ((string= ln "#include <...> search starts here:")
+          (setq found t))
+         ((string= ln "End of search list.")
+          (setq found nil))
+         ((and found t)
+          (setq paths (append paths (list ln))))
+         )))
+    paths)
 )
 
-(setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item))
-              (split-string auto-complete-clang-includes)))
+(when (not (string= system-type "darwin"))
+  (setq ac-clang-flags
+      (mapcar (lambda (item)(concat "-I" item)) (g++-include-path))))
 
 ;;----------------------------------------------------------------------------------
 ;; cscope
