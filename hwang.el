@@ -102,6 +102,30 @@
 (add-to-list 'ac-modes 'cmake-mode)
 
 ;;----------------------------------------------------------------------------------
+;; Fix auto complete clang search path, obtain the include path list by:
+;; $ echo | g++ -v -x c++ -E -
+;;----------------------------------------------------------------------------------
+(cond
+ ((string-equal system-type "gnu/linux")
+  (setq auto-complete-clang-includes "
+/usr/include/c++/4.8
+/usr/include/x86_64-linux-gnu/c++/4.8
+/usr/include/c++/4.8/backward
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include
+/usr/local/include
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed
+/usr/include/x86_64-linux-gnu
+/usr/include"))
+ ((string-equal system-type "cygwin")
+  (setq auto-complete-clang-includes
+        ""))
+)
+
+(setq ac-clang-flags
+      (mapcar (lambda (item)(concat "-I" item))
+              (split-string auto-complete-clang-includes)))
+
+;;----------------------------------------------------------------------------------
 ;; cscope
 ;;----------------------------------------------------------------------------------
 (require 'xcscope)
