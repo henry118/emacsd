@@ -14,8 +14,6 @@
 ;; load paths
 ;;---------------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/cedet")
-(add-to-list 'load-path "~/.emacs.d/cedet/contrib")
 (add-to-list 'load-path "~/.emacs.d/distel/elisp")
 (add-to-list 'load-path "~/.emacs.d/emacstts")
 
@@ -68,53 +66,6 @@
       (color-theme-initialize)))
 
 ;;---------------------------------------------------------------------------------
-;; cedet
-;;---------------------------------------------------------------------------------
-(load-file "~/.emacs.d/cedet/cedet-devel-load.el")
-(require 'semantic/bovine/c)
-(require 'semantic/bovine/clang)
-(require 'semantic/bovine/gcc)
-(require 'semantic/ia)
-(require 'semantic/analyze/debug)
-(require 'semantic/decorate/include)
-(require 'eassist)
-
-(add-to-list 'load-path "~/.emacs.d/cedet/contrib/")
-(add-to-list 'Info-directory-list "~/.emacs.d/cedet/doc/info")
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-
-;; Add header directories of 3rd party libraries
-(cond
- ((or (string-equal system-type "darwin") (string-equal system-type "gnu/linux"))
-  (progn
-    (semantic-add-system-include "/usr/local/include" 'c++-mode)))
- ((string-equal system-type "windows-nt")
-  (progn
-    (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-    (add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
-    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
-    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
- ((string-equal system-type "cygwin")
-  (progn
-    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include" 'c++-mode)
-    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++" 'c++-mode)
-    (semantic-add-system-include "/usr/lib/gcc/i686-pc-cygwin/4.7.3/include/c++/i686-pc-cygwin" 'c++-mode)))
-)
-
-;; Now turn on semantic
-(semantic-mode 1)
-
-;;---------------------------------------------------------------------------------
 ;; yasnippnet
 ;;---------------------------------------------------------------------------------
 (require 'yasnippet)
@@ -130,18 +81,18 @@
 ;; auto-complete
 ;;----------------------------------------------------------------------------------
 (require 'auto-complete-config)
+(require 'auto-complete-clang)
 (ac-config-default)
-(add-to-list 'ac-modes 'cmake-mode)
 (setq ac-auto-start nil)
+(setq ac-quick-help-delay 0.5)
 (global-set-key "\M-/" 'auto-complete)
+(add-to-list 'ac-modes 'cmake-mode)
 
 ;;----------------------------------------------------------------------------------
 ;; cscope
 ;;----------------------------------------------------------------------------------
 (require 'xcscope)
 (setq cscope-do-not-update-database t)
-(require 'semantic/db-cscope)
-(semanticdb-enable-cscope-databases nil)
 
 ;;----------------------------------------------------------------------------------
 ;; ido everywhere
@@ -149,14 +100,6 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
-
-;;----------------------------------------------------------------------------------
-;; ECB settings
-;;----------------------------------------------------------------------------------
-(setq ecb-minor-mode-text "ECB")
-(setq ecb-options-version "2.40")
-(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
-(setq ecb-tip-of-the-day nil)
 
 ;;----------------------------------------------------------------------------------
 ;; EmacsTTS
@@ -191,23 +134,7 @@
 ;;----------------------------------------------------------------------------------
 (defun hwang/cmode-hook()
   (hs-minor-mode t)
-  (setq ac-sources (append '(ac-source-semantic) ac-sources))
-  (local-set-key [s-mouse-1]   'semantic-ia-fast-mouse-jump)
-  (local-set-key [s-mouse-3]   'semantic-mrub-switch-tags)
-  ;;(local-set-key (kbd ".")     'semantic-complete-self-insert)
-  ;;(local-set-key (kbd ">")     'semantic-complete-self-insert)
-  (local-set-key (kbd "C-c l") 'semantic-ia-complete-symbol-menu)
-  (local-set-key (kbd "C-c ?") 'semantic-ia-complete-symbol)
-  (local-set-key (kbd "C-c >") 'semantic-complete-analyze-inline)
-  (local-set-key (kbd "C-c =") 'semantic-decoration-include-visit)
-  (local-set-key (kbd "C-c j") 'semantic-ia-fast-jump)
-  (local-set-key (kbd "C-c J") 'semantic-complete-jump)
-  (local-set-key (kbd "C-c q") 'semantic-ia-show-doc)
-  (local-set-key (kbd "C-c s") 'semantic-ia-show-summary)
-  (local-set-key (kbd "C-c p") 'semantic-analyze-proto-impl-toggle)
-  (local-set-key (kbd "C-c f") 'semantic-symref)
-  (local-set-key (kbd "C-c v") 'semantic-symref-symbol)
-  (local-set-key (kbd "<f4>")  'semantic-complete-jump)
+  (setq ac-sources (append '(ac-source-clang) ac-sources))
   (local-set-key (kbd "M-o")   'eassist-switch-h-cpp)
   (local-set-key (kbd "M-m")   'eassist-list-methods)
   (local-set-key (kbd "M-P")   'compile)
