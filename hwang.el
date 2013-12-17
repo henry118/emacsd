@@ -4,9 +4,22 @@
 ;;
 ;; Author: Henry Wang <henry118@gmail.com>
 ;;
-;; * I am using the trunk version of CEDET:
-;;   $ bzr co bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk/ cedet
-;; * Most other packages can be found in Emacs packages (M-x list-packages)
+;; Comment:
+;;
+;;   * Most packages can be found in Emacs packages (M-x list-packages)
+;;   * For CXX completion, Clang must be installed. I dont use CEDET anymore
+;;     since my computer is slow.
+;;   * For Python completion, py-epc & jedi python eggs must be installed
+;;
+;; Used packages:
+;;   yasnippet
+;;   auto-complete
+;;   auto-complete-clang
+;;   dired+
+;;   clips-mode
+;;   markdown-mode
+;;   epc
+;;   jedi
 ;;
 ;;=================================================================================
 
