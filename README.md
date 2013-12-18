@@ -1,10 +1,10 @@
-emacsd
+Emacsd
 ======
 
 This repository is my ~/.emacs.d directory. It is meant to be platform neutral.
 
 
-usage
+Usage
 -----
 
 Simply put the following line into your .emacs file.
@@ -24,7 +24,7 @@ API key like this:
 (setenv "PASTEBIN_KEY" "pastebin-api-dev-key-here")
 ```
 
-tips
+Tips
 ----
 
 * On Windows systems, Cygwin must be installed
@@ -34,7 +34,7 @@ tips
 * EMMS module might require mplayer to be functional
 
 
-packages
+Packages
 --------
 
 Most of the plugins that are referenced in my configurations can be installed
