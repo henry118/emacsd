@@ -360,3 +360,5 @@
 ;;----------------------------------------------------------------------------------
 ;; Quick window switch
 (windmove-default-keybindings 'meta)
+;; Language environmenet to UTF-8
+(set-language-environment 'UTF-8)
