@@ -362,3 +362,6 @@
 (windmove-default-keybindings 'meta)
 ;; Language environmenet to UTF-8
 (set-language-environment 'UTF-8)
+;; Turn on mouse support when running in terminal
+(when (not (display-graphic-p))
+  (xterm-mouse-mode t))
