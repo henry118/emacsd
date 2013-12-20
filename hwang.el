@@ -302,6 +302,20 @@
 (add-hook 'before-save-hook 'hwang/before-save-hook)
 
 ;;----------------------------------------------------------------------------------
+;; Eshell settings
+;;----------------------------------------------------------------------------------
+(defun hwang/eshell-prompt()
+  "Eshell prompt function"
+  (format
+   "%s@%s:%s %s "
+   (user-login-name)
+   (car (split-string (system-name) "\\."))
+   (substring default-directory 0 -1)
+   (if (= (user-uid) 0) " # " " $ "))
+  )
+(setq eshell-prompt-function 'hwang/eshell-prompt)
+
+;;----------------------------------------------------------------------------------
 ;; Set up auto modes
 ;;----------------------------------------------------------------------------------
 (setq auto-mode-alist
