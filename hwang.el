@@ -191,6 +191,7 @@
 ;; Emacs-Lisp Mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang/elisp-hook()
+  (imenu-add-to-menubar "Imenu")
   (local-set-key (kbd "M-m")   'idomenu)
 )
 (add-hook 'emacs-lisp-mode-hook 'hwang/elisp-hook)
