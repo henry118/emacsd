@@ -191,7 +191,7 @@
 ;; Emacs-Lisp Mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang/elisp-hook()
-  (local-set-key (kbd "M-m")   'eassist-list-methods)
+  (local-set-key (kbd "M-m")   'idomenu)
 )
 (add-hook 'emacs-lisp-mode-hook 'hwang/elisp-hook)
 
@@ -200,9 +200,10 @@
 ;;----------------------------------------------------------------------------------
 (defun hwang/cmode-hook()
   (hs-minor-mode t)
+  (imenu-add-to-menubar "Imenu")
   (setq ac-sources (append '(ac-source-clang) ac-sources))
-  (local-set-key (kbd "M-o")   'eassist-switch-h-cpp)
-  (local-set-key (kbd "M-m")   'eassist-list-methods)
+  (local-set-key (kbd "M-o")   'ff-find-other-file)
+  (local-set-key (kbd "M-m")   'idomenu)
   (local-set-key (kbd "M-P")   'compile)
   (local-set-key (kbd "M-p")   'recompile)
   (local-set-key (kbd "M-.")   'cscope-find-global-definition)
@@ -213,31 +214,18 @@
 (add-hook 'c-mode-common-hook 'hwang/cmode-hook)
 
 ;;----------------------------------------------------------------------------------
-;; Java mode setup
-;;----------------------------------------------------------------------------------
-;;(defun hwang/jde-mode-hook()
-;;  (local-set-key (kbd "M-.")   'jde-complete-menu)
-;;  (local-set-key (kbd "<f3>")  'jde-find)
-;;  (local-set-key (kbd "<f4>")  'jde-find-class-source)
-;;  (local-set-key (kbd "<f5>")  'eassist-switch-h-cpp)
-;;  (local-set-key (kbd "<f6>")  'eassist-list-methods)
-;;  (local-set-key (kbd "<f7>")  'jde-set-global-classpath)
-;;  (local-set-key (kbd "<f8>")  'jde-compile)
-;;)
-;;(add-hook 'jde-mode-hook 'hwang/jde-mode-hook)
-
-;;----------------------------------------------------------------------------------
 ;; Python mode setup
 ;;----------------------------------------------------------------------------------
 (if (or (string-equal system-type "windows-nt") (string-equal system-type "cygwin"))
   (require 'python-mode))
 
 (defun hwang/python-mode-hook()
+  (imenu-add-to-menubar "Imenu")
   (jedi:setup)
   (setq jedi:setup-keys t)
   (setq jedi:complete-on-dot t)
   (hs-minor-mode t)
-  (local-set-key (kbd "M-m") 'eassist-list-methods)
+  (local-set-key (kbd "M-m") 'idomenu)
   (local-set-key (kbd "M-.") 'jedi:goto-definition)
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)
   (local-set-key (kbd "C-c d") 'jedi:show-doc)
@@ -247,24 +235,26 @@
 ;;----------------------------------------------------------------------------------
 ;; Perl mode setup
 ;;----------------------------------------------------------------------------------
-(add-hook 'cperl-mode-hook
-          (lambda()
-            (require 'perl-completion)
-            (perl-completion-mode t)
-            (local-set-key (kbd "M-m")  'eassist-list-methods)
-	    ))
+(defun hwang/cperl-mode-hook()
+  (imenu-add-to-menubar "Imenu")
+  (require 'perl-completion)
+  (perl-completion-mode t)
+  (local-set-key (kbd "M-m")  'idomenu)
+  )
+(add-hook 'cperl-mode-hook 'hwang/cperl-mode-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Makefile mode setup
 ;;----------------------------------------------------------------------------------
-(add-hook 'GNUmakefile-mode-hook
-          (lambda()
-            (setq indent-tabs-mode t)
-            ))
-(add-hook 'conf-mode-hook
-          (lambda()
-            (setq indent-tabs-mode t)
-            ))
+(defun hwang/makefile-mode-hook()
+  (setq indent-tabs-mode t)
+  )
+(add-hook 'GNUmakefile-mode-hook 'hwang/makefile-mode-hook)
+
+(defun hwang/conf-mode-hook()
+  (setq indent-tabs-mode t)
+  )
+(add-hook 'conf-mode-hook 'hwang/conf-mode-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Erlang mode setup
