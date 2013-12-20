@@ -59,3 +59,5 @@ The following packages need to be installed via Emacs packaging system:
 * jedi
 * emms
 * w3m
+* iedit
+* wagit
