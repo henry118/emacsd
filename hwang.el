@@ -25,6 +25,8 @@
 ;;   regex-tool
 ;;   magit
 ;;   iedit
+;;   idomenu
+;;   flyspell
 ;;
 ;;=================================================================================
 
@@ -183,7 +185,7 @@
 ;; Other packages
 ;;----------------------------------------------------------------------------------
 (require 'dired+)
-(require 'buff-menu+)
+;(require 'buff-menu+)
 (require 'gnus)
 (require 'diff-mode-)
 (require 'pastebin)

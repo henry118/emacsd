@@ -60,4 +60,6 @@ The following packages need to be installed via Emacs packaging system:
 * emms
 * w3m
 * iedit
-* wagit
+* magit
+* idomenu
+* flyspell
