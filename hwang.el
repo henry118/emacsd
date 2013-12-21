@@ -148,6 +148,17 @@
   (setq ac-clang-flags
       (mapcar (lambda (item)(concat "-I" item)) (g++-include-path))))
 
+(defun my-project-include (path)
+  "Append project local include directories to clang completion"
+  (interactive (list (read-directory-name "Path: ")) )
+  (setq ac-clang-flags (append ac-clang-flags (list (concat "-I" path)))))
+
+(defun my-project-include-list (paths)
+  "Append a list of project local include paths to clang completion"
+  (setq ac-clang-flags
+      (append ac-clang-flags
+      (mapcar (lambda (item)(concat "-I" item)) paths))))
+
 ;;----------------------------------------------------------------------------------
 ;; cscope
 ;;----------------------------------------------------------------------------------
