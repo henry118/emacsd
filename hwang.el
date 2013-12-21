@@ -112,27 +112,29 @@
 ;; Fix auto complete clang search path, obtain the include path list by:
 ;; $ echo | g++ -v -x c++ -E -
 ;;----------------------------------------------------------------------------------
-(defun s-trim-left (s)
+(defun hwang:s-trim-left (s)
   "Remove whitespace at the beginning of S."
   (if (string-match "\\`[ \t\n\r]+" s)
       (replace-match "" t t s)
     s))
-(defun s-trim-right (s)
+
+(defun hwang:s-trim-right (s)
   "Remove whitespace at the end of S."
   (if (string-match "[ \t\n\r]+\\'" s)
       (replace-match "" t t s)
     s))
-(defun s-trim (s)
-  "Remove whitespace at the beginning and end of S."
-  (s-trim-left (s-trim-right s)))
 
-(defun g++-include-path ()
+(defun hwang:s-trim (s)
+  "Remove whitespace at the beginning and end of S."
+  (hwang:s-trim-left (hwang:s-trim-right s)))
+
+(defun hwang:g++-include-path ()
   "Return a list of include paths of g++"
   (let ((lines) (paths) (found))
     (setq lines (process-lines "sh" "-c" "echo | g++ -v -x c++ -E -"))
     (dolist (ln lines)
       (progn
-        (setq ln (s-trim ln))
+        (setq ln (hwang:s-trim ln))
         (cond
          ((string= ln "#include <...> search starts here:")
           (setq found t))
@@ -146,14 +148,14 @@
 
 (when (not (string= system-type "darwin"))
   (setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item)) (g++-include-path))))
+      (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
 
-(defun my-project-include (path)
+(defun hwang:include (path)
   "Append project local include directories to clang completion"
   (interactive (list (read-directory-name "Path: ")) )
   (setq ac-clang-flags (append ac-clang-flags (list (concat "-I" path)))))
 
-(defun my-project-include-list (paths)
+(defun hwang:include-list (paths)
   "Append a list of project local include paths to clang completion"
   (setq ac-clang-flags
       (append ac-clang-flags
@@ -175,7 +177,7 @@
 ;;----------------------------------------------------------------------------------
 ;; EmacsTTS
 ;;----------------------------------------------------------------------------------
-(defun my-emacstts-start ()
+(defun hwang:emacstts-start ()
   "Load emacstts module"
   (interactive)
   (require 'emacstts)
@@ -184,7 +186,7 @@
 ;;----------------------------------------------------------------------------------
 ;; EMMS
 ;;----------------------------------------------------------------------------------
-(defun my-emms-start ()
+(defun hwang:emms-start ()
   "Load EMMS module"
   (interactive)
   (require 'emms-setup)
@@ -206,16 +208,16 @@
 ;;----------------------------------------------------------------------------------
 ;; Emacs-Lisp Mode setup
 ;;----------------------------------------------------------------------------------
-(defun hwang/elisp-hook()
+(defun hwang:elisp-hook()
   (imenu-add-to-menubar "Imenu")
   (local-set-key (kbd "M-m")   'idomenu)
 )
-(add-hook 'emacs-lisp-mode-hook 'hwang/elisp-hook)
+(add-hook 'emacs-lisp-mode-hook 'hwang:elisp-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; C Mode setup
 ;;----------------------------------------------------------------------------------
-(defun hwang/cmode-hook()
+(defun hwang:cmode-hook()
   (hs-minor-mode t)
   (imenu-add-to-menubar "Imenu")
   (setq ac-sources (append '(ac-source-clang) ac-sources))
@@ -228,7 +230,7 @@
   (local-set-key (kbd "C-.")   'cscope-find-functions-calling-this-function)
   (local-set-key (kbd "C-,")   'cscope-find-this-symbol)
   )
-(add-hook 'c-mode-common-hook 'hwang/cmode-hook)
+(add-hook 'c-mode-common-hook 'hwang:cmode-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Python mode setup
@@ -236,7 +238,7 @@
 (if (or (string-equal system-type "windows-nt") (string-equal system-type "cygwin"))
   (require 'python-mode))
 
-(defun hwang/python-mode-hook()
+(defun hwang:python-mode-hook()
   (imenu-add-to-menubar "Imenu")
   (jedi:setup)
   (setq jedi:setup-keys t)
@@ -247,31 +249,31 @@
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)
   (local-set-key (kbd "C-c d") 'jedi:show-doc)
   )
-(add-hook 'python-mode-hook 'hwang/python-mode-hook)
+(add-hook 'python-mode-hook 'hwang:python-mode-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Perl mode setup
 ;;----------------------------------------------------------------------------------
-(defun hwang/cperl-mode-hook()
+(defun hwang:cperl-mode-hook()
   (imenu-add-to-menubar "Imenu")
   (require 'perl-completion)
   (perl-completion-mode t)
   (local-set-key (kbd "M-m")  'idomenu)
   )
-(add-hook 'cperl-mode-hook 'hwang/cperl-mode-hook)
+(add-hook 'cperl-mode-hook 'hwang:cperl-mode-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Makefile mode setup
 ;;----------------------------------------------------------------------------------
-(defun hwang/makefile-mode-hook()
+(defun hwang:makefile-mode-hook()
   (setq indent-tabs-mode t)
   )
-(add-hook 'GNUmakefile-mode-hook 'hwang/makefile-mode-hook)
+(add-hook 'GNUmakefile-mode-hook 'hwang:makefile-mode-hook)
 
-(defun hwang/conf-mode-hook()
+(defun hwang:conf-mode-hook()
   (setq indent-tabs-mode t)
   )
-(add-hook 'conf-mode-hook 'hwang/conf-mode-hook)
+(add-hook 'conf-mode-hook 'hwang:conf-mode-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Erlang mode setup
@@ -292,35 +294,35 @@
 ;; (require 'distel)
 ;; (distel-setup)
 
-;; (defun hwang/erlang-hook()
+;; (defun hwang:erlang-hook()
 ;;   (setq inferior-erlang-machine-options '("-sname" "emacs"))
 ;;   (imenu-add-to-menubar "Imenu")
 ;;   )
-;; (add-hook 'erlang-mode-hook 'hwang/erlang-hook)
+;; (add-hook 'erlang-mode-hook 'hwang:erlang-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; CMake mode setup
 ;;----------------------------------------------------------------------------------
 (require 'cmake-mode)
-(defun hwang/cmake-hook()
+(defun hwang:cmake-hook()
   (local-set-key (kbd "C-c l") 'cmake-help-list-commands)
   (local-set-key (kbd "C-c h") 'cmake-help-command)
 )
-(add-hook 'cmake-mode-hook 'hwang/cmake-hook)
+(add-hook 'cmake-mode-hook 'hwang:cmake-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Before Save Hook
 ;;----------------------------------------------------------------------------------
-(defun hwang/before-save-hook()
+(defun hwang:before-save-hook()
   (if (not (string-equal mode-name "Markdown"))
       (delete-trailing-whitespace))
 )
-(add-hook 'before-save-hook 'hwang/before-save-hook)
+(add-hook 'before-save-hook 'hwang:before-save-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Eshell settings
 ;;----------------------------------------------------------------------------------
-(defun hwang/eshell-prompt()
+(defun hwang:eshell-prompt()
   "Eshell prompt function"
   (format
    "%s@%s:%s%s "
@@ -331,7 +333,7 @@
     (if (= (length default-directory) 1) default-directory (substring default-directory 0 -1)))
    (if (= (user-uid) 0) "#" "$"))
   )
-(setq eshell-prompt-function 'hwang/eshell-prompt)
+(setq eshell-prompt-function 'hwang:eshell-prompt)
 (setq eshell-prompt-regexp "^[^#$]+[#$] ")
 
 ;;----------------------------------------------------------------------------------
