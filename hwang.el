@@ -235,11 +235,8 @@
 ;;----------------------------------------------------------------------------------
 ;; Python mode setup
 ;;----------------------------------------------------------------------------------
-(if (or (string-equal system-type "windows-nt") (string-equal system-type "cygwin"))
-  (require 'python-mode))
-
 (defun hwang:python-mode-hook()
-  ;(imenu-add-to-menubar "Imenu")
+  (imenu-add-to-menubar "Imenu")
   (jedi:setup)
   (setq jedi:setup-keys t)
   (setq jedi:complete-on-dot t)
