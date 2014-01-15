@@ -27,6 +27,7 @@
 ;;   iedit
 ;;   idomenu
 ;;   flyspell
+;;   emacs-eclim
 ;;
 ;;=================================================================================
 
@@ -98,11 +99,20 @@
 ;(require 'anything-match-plugin)
 
 ;;----------------------------------------------------------------------------------
+;; Eclim
+;;----------------------------------------------------------------------------------
+(require 'eclim)
+(global-eclim-mode)
+;(setq eclim-executable "c:/Tools/eclipse/eclim.bat")
+
+;;----------------------------------------------------------------------------------
 ;; auto-complete
 ;;----------------------------------------------------------------------------------
 (require 'auto-complete-config)
 (require 'auto-complete-clang)
+(require 'ac-emacs-eclim-source)
 (ac-config-default)
+(ac-emacs-eclim-config)
 (setq ac-auto-start nil)
 (setq ac-quick-help-delay 0.5)
 (global-set-key "\M-/" 'auto-complete)
