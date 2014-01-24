@@ -423,3 +423,9 @@
 ;; Turn on mouse support when running in terminal
 (when (not (display-graphic-p))
   (xterm-mouse-mode t))
+;; I don't use tool bar at all!
+(tool-bar-mode 0)
+;; Who use the bar to scroll?
+(scroll-bar-mode 0)
+;; Keep quiet
+(setq visible-bell t)
