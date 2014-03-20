@@ -15,6 +15,7 @@
 ;;   yasnippet
 ;;   auto-complete
 ;;   auto-complete-clang
+;;   auto-complete-nxml
 ;;   dired+
 ;;   clips-mode
 ;;   markdown-mode
