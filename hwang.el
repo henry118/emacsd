@@ -119,6 +119,7 @@
 (require 'auto-complete-config)
 (require 'auto-complete-clang)
 (require 'ac-emacs-eclim-source)
+(require 'auto-complete-nxml)
 (ac-config-default)
 (ac-emacs-eclim-config)
 (setq ac-auto-start nil)
