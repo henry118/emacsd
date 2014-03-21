@@ -111,7 +111,7 @@
     (help-at-pt-set-timer)
     (cond
      ((string= system-type "gnu/linux")
-      (setq eclim-eclipse-dirs '("~/eclipse")))
+      (setq eclim-executable "~/bin/eclim"))
      ((string= system-type "darwin")
       (setq eclim-eclipse-dirs '("/Application/eclipse")))))
 )
@@ -337,6 +337,7 @@
   (local-set-key (kbd "M-,") 'pop-global-mark)
   (local-set-key (kbd "C-.") 'eclim-java-find-references)
   (local-set-key (kbd "M-p") 'eclim-project-build)
+  (local-set-key (kbd "M-m") 'eclim-maven-run)
 )
 (add-hook 'java-mode-hook 'hwang:java-hook)
 
