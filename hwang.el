@@ -338,6 +338,12 @@
   (local-set-key (kbd "C-.") 'eclim-java-find-references)
   (local-set-key (kbd "M-p") 'eclim-project-build)
   (local-set-key (kbd "M-m") 'eclim-maven-run)
+  (local-set-key (kbd "C-c r") 'eclim-run-class)
+  (local-set-key (kbd "C-c d") 'eclim-java-show-documentation-for-current-element)
+  (local-set-key (kbd "C-c h") 'eclim-java-hierarchy)
+  (local-set-key (kbd "C-c g") 'eclim-java-generate-getter-and-setter)
+  (local-set-key (kbd "C-c t") 'eclim-java-find-type)
+  (local-set-key (kbd "C-c c") 'eclim-problems-correct)
 )
 (add-hook 'java-mode-hook 'hwang:java-hook)
 
