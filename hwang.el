@@ -102,17 +102,19 @@
 ;;----------------------------------------------------------------------------------
 ;; Eclim
 ;;----------------------------------------------------------------------------------
-;; (require 'eclim)
-;; (global-eclim-mode)
-;; (setq help-at-pt-display-when-idle t)
-;; (setq help-at-pt-timer-delay 0.1)
-;; (help-at-pt-set-timer)
-;; (cond
-;;  ((string= system-type "windows-nt")
-;;   (setq eclim-executable "c:/Tools/eclipse/eclim.bat"))
-;;  ((string= system-type "darwin")
-;;   (setq eclim-eclipse-dirs '("/Application/eclipse")))
-;; )
+(when (or (string= system-type "gnu/linux")(string= system-type "darwin"))
+  (progn
+    (require 'eclim)
+    (global-eclim-mode)
+    (setq help-at-pt-display-when-idle t)
+    (setq help-at-pt-timer-delay 0.1)
+    (help-at-pt-set-timer)
+    (cond
+     ((string= system-type "gnu/linux")
+      (setq eclim-eclipse-dirs '("~/eclipse")))
+     ((string= system-type "darwin")
+      (setq eclim-eclipse-dirs '("/Application/eclipse")))))
+)
 
 ;;----------------------------------------------------------------------------------
 ;; auto-complete
@@ -330,13 +332,13 @@
 ;;----------------------------------------------------------------------------------
 ;; Java mode setup
 ;;----------------------------------------------------------------------------------
-;; (defun hwang:java-hook()
-;;   (local-set-key (kbd "M-.") 'eclim-java-find-declaration)
-;;   (local-set-key (kbd "M-,") 'pop-global-mark)
-;;   (local-set-key (kbd "C-.") 'eclim-java-find-references)
-;;   (local-set-key (kbd "M-p") 'eclim-project-build)
-;; )
-;; (add-hook 'java-mode-hook 'hwang:java-hook)
+(defun hwang:java-hook()
+  (local-set-key (kbd "M-.") 'eclim-java-find-declaration)
+  (local-set-key (kbd "M-,") 'pop-global-mark)
+  (local-set-key (kbd "C-.") 'eclim-java-find-references)
+  (local-set-key (kbd "M-p") 'eclim-project-build)
+)
+(add-hook 'java-mode-hook 'hwang:java-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; Before Save Hook
