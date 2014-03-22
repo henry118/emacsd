@@ -347,6 +347,7 @@
 (defun hwang:java-hook()
   (local-set-key (kbd "M-.") 'eclim-java-find-declaration)
   (local-set-key (kbd "M-,") 'pop-global-mark)
+  (local-set-key (kbd "M-?") 'eclim-complete)
   (local-set-key (kbd "C-.") 'eclim-java-find-references)
   (local-set-key (kbd "M-p") 'eclim-project-build)
   (local-set-key (kbd "M-m") 'eclim-maven-run)
