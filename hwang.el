@@ -28,7 +28,9 @@
 ;;   iedit
 ;;   idomenu
 ;;   flyspell
-;;   emacs-eclim
+;;   emacs-eclim (requires Eclim - http://eclim.org/install.html)
+;;   csharp-mode
+;;   omni-sharp (requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
 ;;
 ;;=================================================================================
 
@@ -131,8 +133,7 @@
 (add-to-list 'ac-modes 'cmake-mode)
 
 ;;----------------------------------------------------------------------------------
-;; Fix auto complete clang search path, obtain the include path list by:
-;; $ echo | g++ -v -x c++ -E -
+;; My utils
 ;;----------------------------------------------------------------------------------
 (defun hwang:s-trim-left (s)
   "Remove whitespace at the beginning of S."
@@ -150,6 +151,16 @@
   "Remove whitespace at the beginning and end of S."
   (hwang:s-trim-left (hwang:s-trim-right s)))
 
+(defun hwang:imenu ()
+  "Add imenu to menubar"
+  (interactive)
+  (imenu-add-to-menubar "Imenu")
+  (message "Imenu has been added to your menubar."))
+
+;;----------------------------------------------------------------------------------
+;; Fix auto complete clang search path, obtain the include path list by:
+;; $ echo | g++ -v -x c++ -E -
+;;----------------------------------------------------------------------------------
 (defun hwang:g++-include-path ()
   "Return a list of include paths of g++"
   (let ((lines) (paths) (found))
@@ -241,8 +252,9 @@
 ;;----------------------------------------------------------------------------------
 (defun hwang:cmode-hook()
   (hs-minor-mode t)
-  (imenu-add-to-menubar "Imenu")
+  ;(imenu-add-to-menubar "Imenu")
   (setq ac-sources (append '(ac-source-clang) ac-sources))
+  (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "M-o")   'ff-find-other-file)
   (local-set-key (kbd "M-m")   'idomenu)
   (local-set-key (kbd "M-P")   'compile)
@@ -348,6 +360,21 @@
 (add-hook 'java-mode-hook 'hwang:java-hook)
 
 ;;----------------------------------------------------------------------------------
+;; C# mode setup
+;;----------------------------------------------------------------------------------
+(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+(defun hwang:csharp-hook()
+  (omnisharp-mode)
+  (local-set-key (kbd "M-/") 'omnisharp-auto-complete)
+  (local-set-key (kbd ".") 'omnisharp-add-dot-and-auto-complete)
+  (local-set-key (kbd "M-.") 'omnisharp-go-to-definition)
+  (local-set-key (kbd "C-.") 'omnisharp-find-usages)
+  (local-set-key (kbd "M-p") 'omnisharp-build-in-emacs)
+  (local-set-key (kbd "C-c f") 'omnisharp-code-format)
+)
+(add-hook 'csharp-mode-hook 'hwang:csharp-hook)
+
+;;----------------------------------------------------------------------------------
 ;; Before Save Hook
 ;;----------------------------------------------------------------------------------
 (defun hwang:before-save-hook()
@@ -386,6 +413,7 @@
          ("\\.clp\\'" . clips-mode)
          ("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|xsd\\)\\'" . nxml-mode)
          ("\\.\\(text\\|markdown\\|md\\)\\'" . markdown-mode)
+         ("\\.cs\\'" . csharp-mode)
          ) auto-mode-alist))
 (setq interpreter-mode-alist
       (append
