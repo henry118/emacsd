@@ -38,46 +38,57 @@
 ;;=================================================================================
 
 ;;---------------------------------------------------------------------------------
-;; load paths
+;; classify system
+;;---------------------------------------------------------------------------------
+(defmacro is-unix ()
+  (cond
+   ((equal system-type 'gnu/linux) t)
+   ((equal system-type 'gnu/kfreebsd) t)
+   ((equal system-type 'berkeley-unix) t)))
+(defmacro is-mac ()
+  (equal system-type 'darwin))
+(defmacro is-win ()
+  (equal system-type 'windows-nt))
+(defmacro is-cygwin ()
+  (equal system-type 'cygwin))
+
+;;---------------------------------------------------------------------------------
+;; load paths for specific platforms
 ;;---------------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/distel/elisp")
 (add-to-list 'load-path "~/.emacs.d/emacstts")
 
-;; load path for specific platforms
-(cond
- ((string-equal system-type "darwin")
-  (progn
-    (add-to-list 'load-path "~/.emacs.d/macintosh")
-    (add-to-list 'load-path "~/.emacs.d/erlmode")
-    (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-    (setq exec-path (append exec-path '("/usr/local/bin")))))
- ((string-equal system-type "windows-nt")
-  (progn
-    (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
-    (setenv "PATH" (concat "c:\\cygwin\\bin;" (getenv "PATH")))
-    (setq exec-path (append exec-path '("~/.emacs.d/windows/bin" "c:/cygwin/bin")))))
- ((string-equal system-type "cygwin")
-  (progn
-    (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/erlmode"))))
+(when (is-mac)
+  (add-to-list 'load-path "~/.emacs.d/macintosh")
+  (add-to-list 'load-path "~/.emacs.d/erlmode")
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setq exec-path (append exec-path '("/usr/local/bin"))))
+
+(when (is-win)
+  (add-to-list 'load-path "~/.emacs.d/windows")
+  (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
+  (setenv "PATH" (concat "c:\\cygwin\\bin;" (getenv "PATH")))
+  (setq exec-path (append exec-path '("~/.emacs.d/windows/bin" "c:/cygwin/bin"))))
+
+(when (is-cygwin)
+  (add-to-list 'load-path "~/.emacs.d/windows")
+  (add-to-list 'load-path "~/.emacs.d/erlmode"))
 
 ;;---------------------------------------------------------------------------------
 ;; setup cygwin for windows
 ;;---------------------------------------------------------------------------------
-(if (string-equal system-type "windows-nt")
-    (progn
-      ;; Prevent issues with the Windows null device (NUL) when using cygwin find with rgrep.
-      (defadvice grep-compute-defaults (around grep-compute-defaults-advice-null-device)
-        "Use cygwin's /dev/null as the null-device."
-        (let ((null-device "/dev/null")) ad-do-it))
-      (ad-activate 'grep-compute-defaults)
-      ;(require 'cygwin-mount)
-      ;(setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
-      ;(cygwin-mount-activate)
-      ;(require 'setup-cygwin)
-      ))
+(when (is-win)
+  ;; Prevent issues with the Windows null device (NUL) when using cygwin find with rgrep.
+  (defadvice grep-compute-defaults (around grep-compute-defaults-advice-null-device)
+    "Use cygwin's /dev/null as the null-device."
+    (let ((null-device "/dev/null")) ad-do-it))
+  (ad-activate 'grep-compute-defaults)
+  ;(require 'cygwin-mount)
+  ;(setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
+  ;(cygwin-mount-activate)
+  ;(require 'setup-cygwin)
+)
 
 ;;---------------------------------------------------------------------------------
 ;; setup emacs package system
@@ -95,10 +106,9 @@
 ;; note that since v24 the built-in deftheme in emacs is pretty good.
 ;; so we only need this in old versions
 ;;---------------------------------------------------------------------------------
-(if (and (string-equal system-type "gnu/linux") (< emacs-major-version 24))
-    (progn
-      (require 'color-theme)
-      (color-theme-initialize)))
+(when (and (is-unix) (< emacs-major-version 24))
+  (require 'color-theme)
+  (color-theme-initialize))
 
 ;;---------------------------------------------------------------------------------
 ;; yasnippnet
@@ -120,13 +130,12 @@
 (setq help-at-pt-display-when-idle t)
 (setq help-at-pt-timer-delay 0.1)
 (help-at-pt-set-timer)
-(cond
- ((string= system-type "gnu/linux")
+(when (is-unix)
   (setq eclim-executable "~/bin/eclim"))
- ((string= system-type "darwin")
+(when (is-mac)
   (setq eclim-eclipse-dirs '("/Application/eclipse")))
- ((string= system-type "windows-nt")
-  (setq eclim-executable "c:/Tools/eclipse/eclim.bat")))
+(when (is-win)
+  (setq eclim-executable "c:/Tools/eclipse/eclim.bat"))
 
 ;;----------------------------------------------------------------------------------
 ;; auto-complete
@@ -189,9 +198,8 @@
     paths)
 )
 
-(when (or (string= system-type "gnu/linux") (string= system-type "cygwin"))
-  (setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
+(when (or (is-unix) (is-cygwin))
+  (setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
 
 (defun hwang:include (path)
   "Append project local include directories to clang completion"
@@ -374,9 +382,8 @@
 ;; C# mode setup
 ;;----------------------------------------------------------------------------------
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(when (string= system-type "windows-nt")
-  (progn
-    (setq omnisharp--windows-curl-tmp-file-path (concat (getenv "HOME") "\\omnisharp-tmp-file.cs"))))
+(when (is-win)
+  (setq omnisharp--windows-curl-tmp-file-path (concat (getenv "HOME") "\\omnisharp-tmp-file.cs")))
 
 (defun hwang:csharp-hook()
   (omnisharp-mode)
