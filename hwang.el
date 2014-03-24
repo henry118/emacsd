@@ -7,9 +7,12 @@
 ;; Comment:
 ;;
 ;;   * Most packages can be found in Emacs packages (M-x list-packages)
-;;   * For CXX completion, Clang must be installed. I dont use CEDET anymore
-;;     since my computer is slow.
+;;   * For CXX completion, Clang must be installed. I don't use CEDET any more
+;;     because my computer is slow. Also note that CXX completion does not work
+;;     under windows, use emacs-w32 under Cygwin instead.
 ;;   * For Python completion, py-epc & jedi python eggs must be installed
+;;   * Java completion requireds package *emacs-eclim*, and Eclim Eclipse plugin
+;;   * C# completion requires package *omnisharp*, and OmniSharpServer
 ;;
 ;; Used packages:
 ;;   yasnippet
@@ -27,10 +30,9 @@
 ;;   magit
 ;;   iedit
 ;;   idomenu
-;;   flyspell
 ;;   emacs-eclim (requires Eclim - http://eclim.org/install.html)
 ;;   csharp-mode
-;;   omni-sharp (requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
+;;   omnisharp (requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
 ;;
 ;;=================================================================================
 
@@ -52,7 +54,9 @@
  ((string-equal system-type "windows-nt")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
-    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")))
+    (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
+    (setenv "PATH" (concat "c:\\cygwin\\bin;" (getenv "PATH")))
+    (setq exec-path (append exec-path '("c:/cygwin/bin")))))
  ((string-equal system-type "cygwin")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
@@ -63,10 +67,16 @@
 ;;---------------------------------------------------------------------------------
 (if (string-equal system-type "windows-nt")
     (progn
-      (require 'cygwin-mount)
-      (setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
-      (cygwin-mount-activate)
-      (require 'setup-cygwin)))
+      ;; Prevent issues with the Windows null device (NUL) when using cygwin find with rgrep.
+      (defadvice grep-compute-defaults (around grep-compute-defaults-advice-null-device)
+        "Use cygwin's /dev/null as the null-device."
+        (let ((null-device "/dev/null")) ad-do-it))
+      (ad-activate 'grep-compute-defaults)
+      ;(require 'cygwin-mount)
+      ;(setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
+      ;(cygwin-mount-activate)
+      ;(require 'setup-cygwin)
+      ))
 
 ;;---------------------------------------------------------------------------------
 ;; setup emacs package system
@@ -104,19 +114,18 @@
 ;;----------------------------------------------------------------------------------
 ;; Eclim
 ;;----------------------------------------------------------------------------------
-(when (or (string= system-type "gnu/linux")(string= system-type "darwin"))
-  (progn
-    (require 'eclim)
-    (global-eclim-mode)
-    (setq help-at-pt-display-when-idle t)
-    (setq help-at-pt-timer-delay 0.1)
-    (help-at-pt-set-timer)
-    (cond
-     ((string= system-type "gnu/linux")
-      (setq eclim-executable "~/bin/eclim"))
-     ((string= system-type "darwin")
-      (setq eclim-eclipse-dirs '("/Application/eclipse")))))
-)
+(require 'eclim)
+(global-eclim-mode)
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+(cond
+ ((string= system-type "gnu/linux")
+  (setq eclim-executable "~/bin/eclim"))
+ ((string= system-type "darwin")
+  (setq eclim-eclipse-dirs '("/Application/eclipse")))
+ ((string= system-type "windows-nt")
+  (setq eclim-executable "c:/Tools/eclipse/eclim.bat")))
 
 ;;----------------------------------------------------------------------------------
 ;; auto-complete
@@ -179,7 +188,7 @@
     paths)
 )
 
-(when (not (string= system-type "darwin"))
+(when (or (string= system-type "gnu/linux") (string= system-type "cygwin"))
   (setq ac-clang-flags
       (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
 
@@ -364,6 +373,10 @@
 ;; C# mode setup
 ;;----------------------------------------------------------------------------------
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+(when (string= system-type "windows-nt")
+  (progn
+    (setq omnisharp--windows-curl-tmp-file-path (concat (getenv "HOME") "\\omnisharp-tmp-file.cs"))))
+
 (defun hwang:csharp-hook()
   (omnisharp-mode)
   (local-set-key (kbd "M-/") 'omnisharp-auto-complete)
