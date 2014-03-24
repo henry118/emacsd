@@ -12,7 +12,8 @@
 ;;     under windows, use emacs-w32 under Cygwin instead.
 ;;   * For Python completion, py-epc & jedi python eggs must be installed
 ;;   * Java completion requireds package *emacs-eclim*, and Eclim Eclipse plugin
-;;   * C# completion requires package *omnisharp*, and OmniSharpServer
+;;   * C# completion requires package *omnisharp*, and OmniSharpServer. Note that
+;;     on windows, omnisharp requires windows native *curl* to work properly.
 ;;
 ;; Used packages:
 ;;   yasnippet
@@ -56,7 +57,7 @@
     (add-to-list 'load-path "~/.emacs.d/windows")
     (add-to-list 'load-path "~/.emacs.d/windows/erlmode")
     (setenv "PATH" (concat "c:\\cygwin\\bin;" (getenv "PATH")))
-    (setq exec-path (append exec-path '("c:/cygwin/bin")))))
+    (setq exec-path (append exec-path '("~/.emacs.d/windows/bin" "c:/cygwin/bin")))))
  ((string-equal system-type "cygwin")
   (progn
     (add-to-list 'load-path "~/.emacs.d/windows")
