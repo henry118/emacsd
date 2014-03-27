@@ -254,13 +254,14 @@
 (require 'diff-mode-)
 (require 'pastebin)
 (require 'clips-mode)
+(require 'doxymacs)
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 
 ;;----------------------------------------------------------------------------------
 ;; Emacs-Lisp Mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang:elisp-hook()
-  (imenu-add-to-menubar "Imenu")
+  (hwang:imenu)
   (local-set-key (kbd "M-m")   'idomenu)
 )
 (add-hook 'emacs-lisp-mode-hook 'hwang:elisp-hook)
@@ -271,6 +272,7 @@
 (defun hwang:cmode-hook()
   (hs-minor-mode t)
   ;(imenu-add-to-menubar "Imenu")
+  (doxymacs-mode)
   (setq ac-sources (append '(ac-source-clang) ac-sources))
   (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "M-o")   'ff-find-other-file)
@@ -288,7 +290,8 @@
 ;; Python mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang:python-mode-hook()
-  (imenu-add-to-menubar "Imenu")
+  (hwang:imenu)
+  (doxymacs-mode)
   (jedi:setup)
   (setq jedi:setup-keys t)
   (setq jedi:complete-on-dot t)
@@ -304,7 +307,7 @@
 ;; Perl mode setup
 ;;----------------------------------------------------------------------------------
 (defun hwang:cperl-mode-hook()
-  (imenu-add-to-menubar "Imenu")
+  (hwang:imenu)
   (require 'perl-completion)
   (perl-completion-mode t)
   (local-set-key (kbd "M-m")  'idomenu)
@@ -364,6 +367,7 @@
 ;;----------------------------------------------------------------------------------
 (defun hwang:java-hook()
   (hwang:imenu)
+  (doxymacs-mode)
   (local-set-key (kbd "M-.") 'eclim-java-find-declaration)
   (local-set-key (kbd "M-,") 'pop-global-mark)
   (local-set-key (kbd "M-?") 'eclim-complete)
@@ -388,6 +392,7 @@
   (setq omnisharp--windows-curl-tmp-file-path (concat (getenv "HOME") "\\omnisharp-tmp-file.cs")))
 
 (defun hwang:csharp-hook()
+  (doxymacs-mode)
   (omnisharp-mode)
   (local-set-key (kbd "M-/") 'omnisharp-auto-complete)
   (local-set-key (kbd ".") 'omnisharp-add-dot-and-auto-complete)
