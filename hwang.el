@@ -298,7 +298,7 @@
   (local-set-key (kbd "M-m") 'idomenu)
   (local-set-key (kbd "M-.") 'jedi:goto-definition)
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)
-  (local-set-key (kbd "C-c d") 'jedi:show-doc)
+  (local-set-key (kbd "C-c h") 'jedi:show-doc)
   )
 (add-hook 'python-mode-hook 'hwang:python-mode-hook)
 
@@ -376,7 +376,7 @@
   (local-set-key (kbd "M-p") 'eclim-project-build)
   (local-set-key (kbd "M-n") 'eclim-maven-run)
   (local-set-key (kbd "C-c r") 'eclim-run-class)
-  (local-set-key (kbd "C-c d") 'eclim-java-show-documentation-for-current-element)
+  (local-set-key (kbd "C-c h") 'eclim-java-show-documentation-for-current-element)
   (local-set-key (kbd "C-c h") 'eclim-java-hierarchy)
   (local-set-key (kbd "C-c g") 'eclim-java-generate-getter-and-setter)
   (local-set-key (kbd "C-c t") 'eclim-java-find-type)
