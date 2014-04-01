@@ -172,8 +172,7 @@
 (defun hwang:imenu ()
   "Add imenu to menubar"
   (interactive)
-  (imenu-add-to-menubar "Imenu")
-  (message "Imenu has been added to your menubar."))
+  (imenu-add-to-menubar "Imenu"))
 
 ;;----------------------------------------------------------------------------------
 ;; Fix auto complete clang search path, obtain the include path list by:
