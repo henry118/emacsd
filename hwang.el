@@ -174,6 +174,16 @@
   (interactive)
   (imenu-add-to-menubar "Imenu"))
 
+(defun hwang:recompile-elpa ()
+  "Delete *.elc in elpa and recompile all packages"
+  (interactive)
+  (require 'find-lisp)
+  (dolist
+    (file (find-lisp-find-files (expand-file-name "~/.emacs.d/elpa") "^.*\\.elc$"))
+    (delete-file file)
+    (message "Deleted %s..." file))
+  (byte-recompile-directory (expand-file-name "~/.emacs.d/elpa") 0))
+
 ;;----------------------------------------------------------------------------------
 ;; Fix auto complete clang search path, obtain the include path list by:
 ;; $ echo | g++ -v -x c++ -E -
