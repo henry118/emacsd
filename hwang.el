@@ -221,12 +221,6 @@
       (mapcar (lambda (item)(concat "-I" item)) paths))))
 
 ;;----------------------------------------------------------------------------------
-;; cscope
-;;----------------------------------------------------------------------------------
-(require 'xcscope)
-(setq cscope-do-not-update-database t)
-
-;;----------------------------------------------------------------------------------
 ;; ido everywhere
 ;;----------------------------------------------------------------------------------
 (setq ido-enable-flex-matching t)
@@ -282,6 +276,8 @@
   ;(imenu-add-to-menubar "Imenu")
   (doxymacs-mode)
   (setq ac-sources (append '(ac-source-clang) ac-sources))
+  (require 'xcscope)
+  (setq cscope-do-not-update-database t)
   (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "M-o")   'ff-find-other-file)
   (local-set-key (kbd "M-m")   'idomenu)
