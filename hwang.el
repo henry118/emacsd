@@ -31,6 +31,8 @@
 ;;   magit
 ;;   iedit
 ;;   idomenu
+;;   ido-vertical-mode
+;;   smex
 ;;   emacs-eclim (requires Eclim - http://eclim.org/install.html)
 ;;   csharp-mode
 ;;   omnisharp (requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
@@ -226,6 +228,16 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+(ido-vertical-mode 1)
+
+;;----------------------------------------------------------------------------------
+;; smex
+;;----------------------------------------------------------------------------------
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;----------------------------------------------------------------------------------
 ;; EmacsTTS
