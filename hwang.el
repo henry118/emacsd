@@ -26,7 +26,6 @@
 ;;   epc
 ;;   jedi
 ;;   emms
-;;   w3m
 ;;   regex-tool
 ;;   magit
 ;;   iedit
@@ -36,6 +35,9 @@
 ;;   emacs-eclim (requires Eclim - http://eclim.org/install.html)
 ;;   csharp-mode
 ;;   omnisharp (requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
+;;   skewer-mode
+;;   js2-mode
+;;   ac-js2
 ;;
 ;;=================================================================================
 
@@ -422,6 +424,18 @@
 (add-hook 'csharp-mode-hook 'hwang:csharp-hook)
 
 ;;----------------------------------------------------------------------------------
+;; Javascript/JQuery mode setup
+;;----------------------------------------------------------------------------------
+(defun hwang:js-hook()
+  (skewer-mode)
+  (setq js2-highlight-level 3)
+  (ac-js2-mode)
+  (setq ac-js2-evaluate-calls t)
+  (setq ac-js2-external-libraries '("/usr/share/javascript/jquery/jquery.js"))
+)
+(add-hook 'js2-mode-hook 'hwang:js-hook)
+
+;;----------------------------------------------------------------------------------
 ;; Before Save Hook
 ;;----------------------------------------------------------------------------------
 (defun hwang:before-save-hook()
@@ -461,6 +475,7 @@
          ("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|xsd\\)\\'" . nxml-mode)
          ("\\.\\(text\\|markdown\\|md\\)\\'" . markdown-mode)
          ("\\.cs\\'" . csharp-mode)
+         ("\\.\\(js\\|json\\)\\'" . js2-mode)
          ) auto-mode-alist))
 (setq interpreter-mode-alist
       (append
@@ -474,7 +489,7 @@
 ;; general variables
 ;;----------------------------------------------------------------------------------
 (custom-set-variables
- '(browse-url-browser-function (quote w3m-browse-url))
+ ;'(browse-url-browser-function (quote w3m-browse-url))
  '(c-basic-offset 4)
  '(c-offsets-alist (quote ((substatement-open . 0) (case-label . +) (innamespace . 0) (arglist-intro . +) (arglist-close . 0))))
  '(cua-mode t nil (cua-base))
