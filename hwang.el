@@ -529,4 +529,4 @@
 ;; Who use the bar to scroll?
 (scroll-bar-mode 0)
 ;; Keep quiet
-;(setq visible-bell t)
+(setq visible-bell t)
