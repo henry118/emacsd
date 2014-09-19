@@ -150,6 +150,31 @@
 ;;----------------------------------------------------------------------------------
 ;; My utils
 ;;----------------------------------------------------------------------------------
+(defun hwang:boostrap ()
+  (package-install 'yasnippet)
+  (package-install 'auto-complete)
+  (package-install 'auto-complete-clang)
+  (package-install 'auto-complete-nxml)
+  (package-install 'dired+)
+  (package-install 'clips-mode)
+  (package-install 'markdown-mode)
+  (package-install 'epc)
+  (package-install 'jedi)
+  ;(package-install 'emms)
+  (package-install 'regex-tool)
+  (package-install 'magit)
+  (package-install 'iedit)
+  (package-install 'idomenu)
+  (package-install 'ido-vertical-mode)
+  (package-install 'smex)
+  (package-install 'malabar-mode)
+  (package-install 'csharp-mode)
+  (package-install 'omnisharp) ;(requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
+  (package-install 'skewer-mode)
+  (package-install 'js2-mode)
+  (package-install 'ac-js2)
+  )
+
 (defun hwang:s-trim-left (s)
   "Remove whitespace at the beginning of S."
   (if (string-match "\\`[ \t\n\r]+" s)
