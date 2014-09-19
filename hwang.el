@@ -32,7 +32,7 @@
 ;;   idomenu
 ;;   ido-vertical-mode
 ;;   smex
-;;   emacs-eclim (requires Eclim - http://eclim.org/install.html)
+;;   malabar-mode (for Java)
 ;;   csharp-mode
 ;;   omnisharp (requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
 ;;   skewer-mode
@@ -60,8 +60,8 @@
 ;; load paths for specific platforms
 ;;---------------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/distel/elisp")
 (add-to-list 'load-path "~/.emacs.d/emacstts")
+(add-to-list 'load-path "~/.emacs.d/cedet")
 
 (when (is-mac)
   (add-to-list 'load-path "~/.emacs.d/macintosh")
@@ -127,32 +127,25 @@
 ;(require 'anything-match-plugin)
 
 ;;----------------------------------------------------------------------------------
-;; Eclim
-;;----------------------------------------------------------------------------------
-(require 'eclim)
-(global-eclim-mode)
-(setq help-at-pt-display-when-idle t)
-(setq help-at-pt-timer-delay 0.1)
-(help-at-pt-set-timer)
-(when (is-unix)
-  (setq eclim-executable "~/bin/eclim"))
-(when (is-mac)
-  (setq eclim-eclipse-dirs '("/Application/eclipse")))
-(when (is-win)
-  (setq eclim-executable "c:/Tools/eclipse/eclim.bat"))
-
-;;----------------------------------------------------------------------------------
 ;; auto-complete
 ;;----------------------------------------------------------------------------------
 (require 'auto-complete-config)
 (require 'auto-complete-clang)
-(require 'ac-emacs-eclim-source)
 (require 'auto-complete-nxml)
 (ac-config-default)
 (setq ac-auto-start nil)
 (setq ac-quick-help-delay 0.5)
 (global-set-key "\M-/" 'auto-complete)
 (add-to-list 'ac-modes 'cmake-mode)
+
+;;----------------------------------------------------------------------------------
+;; CEDET
+;;----------------------------------------------------------------------------------
+(require 'cedet)
+(require 'semantic)
+(require 'eassist)
+(load "semantic/loaddefs.el")
+(semantic-mode 1)
 
 ;;----------------------------------------------------------------------------------
 ;; My utils
@@ -294,7 +287,7 @@
   (setq cscope-do-not-update-database t)
   (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "M-o")   'ff-find-other-file)
-  (local-set-key (kbd "M-m")   'idomenu)
+  (local-set-key (kbd "M-m")   'eassist-list-methods)
   (local-set-key (kbd "M-P")   'compile)
   (local-set-key (kbd "M-p")   'recompile)
   (local-set-key (kbd "M-.")   'cscope-find-global-definition)
@@ -383,26 +376,25 @@
 ;;----------------------------------------------------------------------------------
 ;; Java mode setup
 ;;----------------------------------------------------------------------------------
+(require 'malabar-mode)
 (defun hwang:java-hook()
-  (hwang:imenu)
   (doxymacs-mode)
-  ;(ac-emacs-eclim-config)
-  (setq ac-sources (append '(ac-source-emacs-eclim) ac-sources))
-  (local-set-key (kbd "M-.") 'eclim-java-find-declaration)
+  (setq ac-sources (append '(ac-source-semantic) ac-sources))
+  (local-set-key (kbd "M-.") 'malabar-jump-to-thing)
   (local-set-key (kbd "M-,") 'pop-global-mark)
-  (local-set-key (kbd "M-?") 'eclim-complete)
-  (local-set-key (kbd "C-.") 'eclim-java-find-references)
-  (local-set-key (kbd "M-p") 'eclim-project-build)
-  (local-set-key (kbd "M-n") 'eclim-maven-run)
-  (local-set-key (kbd "C-c r") 'eclim-run-class)
-  (local-set-key (kbd "C-c h") 'eclim-java-show-documentation-for-current-element)
-  (local-set-key (kbd "C-c h") 'eclim-java-hierarchy)
-  (local-set-key (kbd "C-c g") 'eclim-java-generate-getter-and-setter)
-  (local-set-key (kbd "C-c t") 'eclim-java-find-type)
-  (local-set-key (kbd "C-c c") 'eclim-problems-correct)
-  (local-set-key (kbd "C-c f") 'eclim-java-format)
+  (local-set-key (kbd "C-,") 'semantic-symref)
+  (local-set-key (kbd "M-p") 'malabar-package-project)
+  (local-set-key (kbd "M-n") 'malabar-run-maven-command)
+  (local-set-key (kbd "C-c c") 'malabar-compile-file)
+  (local-set-key (kbd "C-c h") 'malabar-show-javadoc)
+  (local-set-key (kbd "C-c g") 'malabar-insert-getset)
+  (local-set-key (kbd "C-c f") 'malabar-find-file-in-project)
+  (local-set-key (kbd "C-c p") 'malabar-visit-project-file)
+  (local-set-key (kbd "C-c a") 'malabar-fully-qualified-class-name-kill-ring-save)
+  (local-set-key (kbd "C-c ?") 'semantic-ia-complete-symbol-menu)
+  (local-set-key (kbd "M-m") 'eassist-list-methods)
 )
-(add-hook 'java-mode-hook 'hwang:java-hook)
+(add-hook 'malabar-mode-hook 'hwang:java-hook)
 
 ;;----------------------------------------------------------------------------------
 ;; C# mode setup
@@ -476,6 +468,7 @@
          ("\\.\\(text\\|markdown\\|md\\)\\'" . markdown-mode)
          ("\\.cs\\'" . csharp-mode)
          ("\\.\\(js\\|json\\)\\'" . js2-mode)
+         ("\\.java\\'" . malabar-mode)
          ) auto-mode-alist))
 (setq interpreter-mode-alist
       (append
