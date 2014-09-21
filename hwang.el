@@ -22,8 +22,8 @@
 ;;=================================================================================
 
 (add-to-list 'load-path "~/.emacs.d")
-(require 'mods/utils)
 (require 'mods/os)
+(require 'mods/utils)
 (require 'mods/pkg)
 (require 'mods/color)
 (require 'mods/misc)

@@ -1,9 +1,21 @@
 ;;
-;; My path setup
+;; Platform Specific Utils
 ;;
 
-(require 'mods/utils)
+(defmacro is-unix ()
+  (cond
+   ((equal system-type 'gnu/linux) t)
+   ((equal system-type 'gnu/kfreebsd) t)
+   ((equal system-type 'berkeley-unix) t)))
 
+(defmacro is-mac ()
+  (equal system-type 'darwin))
+
+(defmacro is-win ()
+  (equal system-type 'windows-nt))
+
+(defmacro is-cygwin ()
+  (equal system-type 'cygwin))
 
 (when (is-mac)
   (add-to-list 'load-path "~/.emacs.d/macintosh")
@@ -20,18 +32,5 @@
 (when (is-cygwin)
   (add-to-list 'load-path "~/.emacs.d/windows")
   (add-to-list 'load-path "~/.emacs.d/erlmode"))
-
-(when (is-win)
-  ;; Prevent issues with the Windows null device (NUL) when using cygwin find with rgrep.
-  (defadvice grep-compute-defaults (around grep-compute-defaults-advice-null-device)
-    "Use cygwin's /dev/null as the null-device."
-    (let ((null-device "/dev/null")) ad-do-it))
-  (ad-activate 'grep-compute-defaults)
-  ;(require 'cygwin-mount)
-  ;(setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
-  ;(cygwin-mount-activate)
-  ;(require 'setup-cygwin)
-)
-
 
 (provide 'mods/os)

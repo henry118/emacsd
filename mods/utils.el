@@ -2,24 +2,10 @@
 ;; My utilies
 ;;
 
+(require 'mods/os)
+
 (add-to-list 'load-path "~/.emacs.d/emacstts")
 (add-to-list 'load-path "~/.emacs.d/cedet")
-
-(defmacro is-unix ()
-  (cond
-   ((equal system-type 'gnu/linux) t)
-   ((equal system-type 'gnu/kfreebsd) t)
-   ((equal system-type 'berkeley-unix) t)))
-
-(defmacro is-mac ()
-  (equal system-type 'darwin))
-
-(defmacro is-win ()
-  (equal system-type 'windows-nt))
-
-(defmacro is-cygwin ()
-  (equal system-type 'cygwin))
-
 
 (defun hwang:s-trim-left (s)
   "Remove whitespace at the beginning of S."
@@ -55,13 +41,5 @@
   (emms-standard)
   (emms-default-players)
 )
-
-(defun hwang:before-save-hook()
-  (if (not (string-equal mode-name "Markdown"))
-      (delete-trailing-whitespace))
-)
-
-(add-hook 'before-save-hook 'hwang:before-save-hook)
-
 
 (provide 'mods/utils)

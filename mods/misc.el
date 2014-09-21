@@ -28,7 +28,14 @@
  '(pastebin-api-dev-key (getenv "PASTEBIN_KEY"))
  )
 
+(defun hwang:before-save-hook()
+  (if (not (string-equal mode-name "Markdown"))
+      (delete-trailing-whitespace))
+)
 
+(add-hook 'before-save-hook 'hwang:before-save-hook)
+
+;; Gobal Key Bindings
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
