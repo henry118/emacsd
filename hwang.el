@@ -46,7 +46,7 @@
 (smex-initialize)
 
 (require 'dired+)
-(require 'buff-menu+)
+;(require 'buff-menu+)
 (require 'gnus)
 (require 'diff-mode-)
 (require 'pastebin)
