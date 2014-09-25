@@ -67,3 +67,4 @@
 (require 'mods/lua)
 (require 'mods/clips)
 (require 'mods/xml)
+(require 'mods/org)

@@ -20,7 +20,7 @@
 (when (is-mac)
   (add-to-list 'load-path "~/.emacs.d/macintosh")
   (add-to-list 'load-path "~/.emacs.d/erlmode")
-  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/texbin"))
   (setq exec-path (append exec-path '("/usr/local/bin"))))
 
 (when (is-win)
