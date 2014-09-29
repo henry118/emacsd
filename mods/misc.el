@@ -42,6 +42,11 @@
 (global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "C-'") 'magit-status)
 
+(when (is-mac)
+  (global-set-key (kbd "<home>") 'beginning-of-line)
+  (global-set-key (kbd "<end>") 'end-of-line)
+)
+
 ;; Quick window switch
 (windmove-default-keybindings 'meta)
 
