@@ -68,3 +68,4 @@
 (require 'mods/clips)
 (require 'mods/xml)
 (require 'mods/org)
+(require 'mods/gnus)
