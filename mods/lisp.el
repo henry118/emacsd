@@ -5,6 +5,7 @@
 (require 'mods/utils)
 
 (defun hwang:elisp-hook()
+  (setq cursor-type 'bar)
   (hs-minor-mode t)
   (hwang:imenu)
   (local-set-key (kbd "M-m")   'idomenu)
