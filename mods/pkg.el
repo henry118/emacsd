@@ -43,6 +43,7 @@
   (package-install 'skewer-mode)
   (package-install 'js2-mode)
   (package-install 'ac-js2)
+  (package-install 'php-mode)
   )
 
 (defun hwang:recompile-elpa ()
