@@ -4,8 +4,8 @@
 
 (require 'mods/os)
 
-(add-to-list 'load-path "~/.emacs.d/emacstts")
-(add-to-list 'load-path "~/.emacs.d/cedet")
+(add-to-list 'load-path "~/.emacs.d/lisp/emacstts")
+(add-to-list 'load-path "~/.emacs.d/lisp/cedet")
 
 (defun hwang:s-trim-left (s)
   "Remove whitespace at the beginning of S."

@@ -3,7 +3,7 @@
 ;;
 
 (when (< emacs-major-version 24)
-  (add-to-list 'load-path "~/.emacs.d/pm"))
+  (add-to-list 'load-path "~/.emacs.d/lisp/pm"))
 
 (require 'package)
 
@@ -37,13 +37,13 @@
   (package-install 'idomenu)
   (package-install 'ido-vertical-mode)
   (package-install 'smex)
+  (package-install 'php-mode)
   (package-install 'malabar-mode)
   (package-install 'csharp-mode)
   (package-install 'omnisharp) ;(requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
   (package-install 'skewer-mode)
   (package-install 'js2-mode)
   (package-install 'ac-js2)
-  (package-install 'php-mode)
   )
 
 (defun hwang:recompile-elpa ()

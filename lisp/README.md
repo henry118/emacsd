@@ -10,7 +10,7 @@ Usage
 Simply put the following line into your .emacs file.
 
 ```
-(load "~/.emacs.d/hwang")
+(load "~/.emacs.d/lisp/hwang")
 ```
 
 Note that my implementation doesn't enforce the visual components such as the
@@ -32,34 +32,3 @@ Tips
 * For Python completions, epc & jedi python packages are required
 * The emacstts requires pyttsx python package
 * EMMS module might require mplayer to be functional
-
-
-Packages
---------
-
-Most of the plugins that are referenced in my configurations can be installed
-via Emacs packaging system, which can be invoked by:
-
-```
-M-x list-packages
-```
-
-The packages that aren't available via the package sources are provided in
-my repository. So there is nothing needs to be done.
-
-The following packages need to be installed via Emacs packaging system:
-
-* yasnippet
-* auto-complete
-* auto-complete-clang
-* dired+
-* clips-mode
-* markdown-mode
-* epc
-* jedi
-* emms
-* w3m
-* iedit
-* magit
-* idomenu
-* flyspell

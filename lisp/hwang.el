@@ -21,7 +21,7 @@
 ;;
 ;;=================================================================================
 
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'mods/os)
 (require 'mods/utils)
 (require 'mods/pkg)
