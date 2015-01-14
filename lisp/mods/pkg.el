@@ -41,6 +41,7 @@
   (package-install 'malabar-mode)
   (package-install 'csharp-mode)
   (package-install 'omnisharp) ;(requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
+  (package-install 'groovy-mode)
   (package-install 'skewer-mode)
   (package-install 'js2-mode)
   (package-install 'ac-js2)
