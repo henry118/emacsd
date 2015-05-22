@@ -42,4 +42,14 @@
   (emms-default-players)
 )
 
+(defun hwang:delete-spaces-after-point ()
+  "Delete spaces (including new lines) after cursor"
+  (interactive)
+  (let ((x (char-after (point))))
+    (while (or (char-equal x ?\s) (char-equal x ?\n) (char-equal x ?\t))
+      (delete-char 1)
+      (setq x (char-after (point)))
+    ))
+)
+
 (provide 'mods/utils)
