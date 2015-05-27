@@ -9,6 +9,7 @@
 ;(setq org-latex-listings 'minted)
 
 (setq org-src-fontify-natively t)
+(setq org-default-notes-file (concat org-directory "/notes.org"))
 
 ;(setq org-latex-pdf-process
 ;      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
