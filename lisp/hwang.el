@@ -28,12 +28,6 @@
 (require 'mods/color)
 (require 'mods/misc)
 
-(require 'yasnippet)
-(yas/global-mode 1)
-
-;(require 'anything-config)
-;(require 'anything-match-plugin)
-
 (require 'mods/ac)
 (require 'cedet)
 (require 'semantic)
@@ -46,7 +40,6 @@
 (smex-initialize)
 
 (require 'dired+)
-;(require 'buff-menu+)
 (require 'gnus)
 (require 'diff-mode-)
 (require 'pastebin)
@@ -60,8 +53,8 @@
 (require 'mods/make)
 ;(require 'mods/erlang)
 (require 'mods/cmake)
-(require 'mods/java)
-(require 'mods/csharp)
+;(require 'mods/java)
+;(require 'mods/csharp)
 (require 'mods/js)
 (require 'mods/eshell)
 (require 'mods/lua)

@@ -8,6 +8,7 @@
 
 ;(setq org-latex-listings 'minted)
 
+(setq org-directory "~/org")
 (setq org-src-fontify-natively t)
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
