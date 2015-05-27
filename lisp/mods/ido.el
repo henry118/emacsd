@@ -10,4 +10,8 @@
 
 (ido-vertical-mode 1)
 
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
+(flx-ido-mode 1)
+
 (provide 'mods/ido)

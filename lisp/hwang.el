@@ -39,6 +39,9 @@
 (require 'smex)
 (smex-initialize)
 
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 (require 'dired+)
 (require 'gnus)
 (require 'diff-mode-)
