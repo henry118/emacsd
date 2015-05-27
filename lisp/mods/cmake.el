@@ -7,7 +7,7 @@
 (add-to-list 'ac-modes 'cmake-mode)
 
 (defun hwang:cmake-hook()
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (local-set-key (kbd "C-c l") 'cmake-help-list-commands)
   (local-set-key (kbd "C-c h") 'cmake-help-command)
 )

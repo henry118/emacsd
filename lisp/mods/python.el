@@ -10,7 +10,7 @@
   (jedi:setup)
   (setq jedi:setup-keys t)
   (setq jedi:complete-on-dot t)
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (define-key jedi-mode-map (kbd "<C-tab>") nil)
   (hs-minor-mode t)
   (local-set-key (kbd "M-m") 'idomenu)

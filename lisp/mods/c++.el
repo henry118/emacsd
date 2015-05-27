@@ -44,7 +44,7 @@
  ;(imenu-add-to-menubar "Imenu")
   (doxymacs-mode)
   (setq ac-sources (append '(ac-source-clang) ac-sources))
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (require 'xcscope)
   (setq cscope-do-not-update-database t)
   (local-set-key (kbd "C-c m") 'hwang:imenu)

@@ -9,7 +9,7 @@
   (hs-minor-mode t)
   (doxymacs-mode)
   (setq ac-sources (append '(ac-source-semantic) ac-sources))
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (local-set-key (kbd "C-<tab>") 'hs-toggle-hiding)
   (local-set-key (kbd "M-.") 'malabar-jump-to-thing)
   (local-set-key (kbd "M-,") 'pop-global-mark)

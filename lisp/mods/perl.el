@@ -7,7 +7,7 @@
 
 (defun hwang:cperl-mode-hook()
   (hwang:imenu)
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (require 'perl-completion)
   (perl-completion-mode t)
   (local-set-key (kbd "M-m")  'idomenu)

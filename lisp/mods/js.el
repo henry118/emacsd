@@ -4,7 +4,7 @@
 
 (defun hwang:js-hook()
   (skewer-mode)
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (setq js2-highlight-level 3)
   (ac-js2-mode)
   (setq ac-js2-evaluate-calls t)

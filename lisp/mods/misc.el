@@ -64,7 +64,7 @@
 (scroll-bar-mode 0)
 
 ;; Keep quiet
-(setq visible-bell t)
+;(setq visible-bell t)
 
 
 (provide 'mods/misc)

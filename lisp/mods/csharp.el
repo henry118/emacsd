@@ -11,7 +11,7 @@
   (setq omnisharp--windows-curl-tmp-file-path (concat (getenv "HOME") "\\omnisharp-tmp-file.cs")))
 
 (defun hwang:csharp-hook()
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   (doxymacs-mode)
   (omnisharp-mode)
   (local-set-key (kbd "M-/") 'omnisharp-auto-complete)

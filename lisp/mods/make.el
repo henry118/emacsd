@@ -10,7 +10,7 @@
 
 (defun hwang:conf-mode-hook()
   (setq indent-tabs-mode t)
-  (setq cursor-type 'bar)
+ ;(setq cursor-type 'bar)
   )
 
 (add-hook 'conf-mode-hook 'hwang:conf-mode-hook)
