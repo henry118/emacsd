@@ -1,6 +1,8 @@
 ;;
 ;; Gnus newsgroup setup
 ;;
+(require 'nnir)
+
 (setq gnus-select-method '(nnnil))
 
 (setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
@@ -15,12 +17,9 @@
 (setq
  gnus-posting-styles
  '((".*"
-    (name "Henry Wang"
-          (address "henry118@gmail.com"
-                   (organization "")
-                   (signature-file "~/.signature")
-                   ("X-Troll" "Emacs is better than Vi")
-                   )))))
+    (signature "Regards,\nHenry Wang\n\nSent from Emacs Gnus.")
+    )
+   ))
 
 (add-to-list
  'gnus-secondary-select-methods
@@ -29,6 +28,7 @@
    (nnimap-address "imap.gmail.com")
    (nnimap-server-port 993)
    (nnimap-stream ssl)
+   (nnir-search-engine imap)
    (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
    (nnmail-expiry-wait 90)
    )
@@ -62,5 +62,17 @@
    ))
 
 (setq gnus-use-correct-string-widths nil)
+
+(defun hwang:gnus-group-list-subscribd-groups()
+  "List all subscribed groups with or without un-read messages."
+  (interactive)
+  (gnus-group-list-all-groups 5)
+)
+
+(defun hwang:gnus-group-mode-hook()
+  (local-set-key (kbd "o") 'hwang:gnus-group-list-subscribd-groups)
+)
+
+(add-hook 'gnus-group-mode-hook 'hwang:gnus-group-mode-hook)
 
 (provide 'mods/gnus)
