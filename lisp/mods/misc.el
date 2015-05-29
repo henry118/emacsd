@@ -66,5 +66,7 @@
 ;; Keep quiet
 ;(setq visible-bell t)
 
+;; TRAMP uses SSH
+(setq tramp-default-method "ssh")
 
 (provide 'mods/misc)
