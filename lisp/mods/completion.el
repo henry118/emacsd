@@ -27,6 +27,7 @@
 (helm-mode 1)
 (helm-autoresize-mode 1)
 
+(global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -36,13 +37,25 @@
 (define-key helm-map (kbd "C-i") 'helm-execute-selection-action)
 (define-key helm-map (kbd "C-z") 'helm-select-action)
 
+;; use ack-grep to replace grep
+(defvar ack-grep-cmd nil)
+(cond
+ ((executable-find "ack-grep")(setq ack-grep-cmd "ack-grep"))
+ ((executable-find "ack")(setq ack-grep-cmd "ack"))
+ )
+(when (stringp ack-grep-cmd)
+  (setq
+   helm-grep-default-command (format "%s -Hn --no-group --no-color %%e %%p %%f" ack-grep-cmd)
+   helm-grep-default-recurse-command (format "%s -H --no-group --no-color %%e %%p %%f" ack-grep-cmd)))
+
+;; Fuzzy matchings
 (setq
  helm-recentf-fuzzy-match t
  helm-buffers-fuzzy-matching t
  helm-locate-fuzzy-match t
  helm-M-x-fuzzy-match t
-;helm-semantic-fuzzy-match t
-;helm-imenu-fuzzy-match t
+ helm-semantic-fuzzy-match nil
+ helm-imenu-fuzzy-match nil
  helm-apropos-fuzzy-match t
  helm-lisp-fuzzy-completion t
  )
