@@ -39,6 +39,7 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "C-'") 'magit-status)
+(global-set-key (kbd "C-x o") 'switch-window)
 
 (when (is-mac)
   (global-set-key (kbd "<home>") 'beginning-of-line)

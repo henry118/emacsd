@@ -25,6 +25,7 @@
     auto-complete-clang
     auto-complete-nxml
     dired+
+    switch-window
     clips-mode
     markdown-mode
     epc
