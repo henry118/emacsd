@@ -31,7 +31,6 @@
 (require 'mods/ac)
 (require 'cedet)
 (require 'semantic)
-(require 'eassist)
 (load "semantic/loaddefs.el")
 (semantic-mode 1)
 

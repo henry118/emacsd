@@ -51,7 +51,6 @@
     ))
 
 (defun hwang:bootstrap ()
-  ;(list-packages)
   (dolist (p hwang-bootstrap-packages)
     (if (not (package-installed-p p))
         (progn
