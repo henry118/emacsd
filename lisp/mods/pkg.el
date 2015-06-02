@@ -19,34 +19,44 @@
    'package-archives
    '("gnu" . "http://elpa.gnu.org/packages/")))
 
+;; The following list contains the packages required for this setup
+(defvar hwang-bootstrap-packages
+  '(auto-complete
+    auto-complete-clang
+    auto-complete-nxml
+    dired+
+    clips-mode
+    markdown-mode
+    epc
+    jedi
+    ;;emms
+    regex-tool
+    magit
+    iedit
+    ;;idomenu
+    ;;ido-vertical-mode
+    ;;flx-ido
+    ;;smex
+    helm
+    helm-cscope
+    undo-tree
+    php-mode
+    ;;malabar-mode
+    ;;csharp-mode
+    ;;omnisharp ;(requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
+    ;;groovy-mode
+    skewer-mode
+    js2-mode
+    ac-js2
+    ))
+
 (defun hwang:bootstrap ()
-  (list-packages)
-  (package-install 'auto-complete)
-  (package-install 'auto-complete-clang)
-  (package-install 'auto-complete-nxml)
-  (package-install 'dired+)
-  (package-install 'clips-mode)
-  (package-install 'markdown-mode)
-  (package-install 'epc)
-  (package-install 'jedi)
- ;(package-install 'emms)
-  (package-install 'regex-tool)
-  (package-install 'magit)
-  (package-install 'iedit)
- ;(package-install 'idomenu)
- ;(package-install 'ido-vertical-mode)
- ;(package-install 'flx-ido)
- ;(package-install 'smex)
-  (package-install 'helm)
-  (package-install 'undo-tree)
-  (package-install 'php-mode)
- ;(package-install 'malabar-mode)
- ;(package-install 'csharp-mode)
- ;(package-install 'omnisharp) ;(requires OmniSharpServer - https://github.com/nosami/OmniSharpServer)
- ;(package-install 'groovy-mode)
-  (package-install 'skewer-mode)
-  (package-install 'js2-mode)
-  (package-install 'ac-js2)
+  ;(list-packages)
+  (dolist (p hwang-bootstrap-packages)
+    (if (not (package-installed-p p))
+        (progn
+          (package-refresh-contents)
+          (package-install p))))
   )
 
 (defun hwang:recompile-elpa ()
@@ -59,8 +69,7 @@
     (message "Deleted %s..." file))
   (byte-recompile-directory (expand-file-name "~/.emacs.d/elpa") 0))
 
-(when (not (file-exists-p "~/.emacs.d/elpa"))
-  (hwang:bootstrap))
-
+;; Now bootstrap Emacs
+(hwang:bootstrap)
 
 (provide 'mods/pkg)
