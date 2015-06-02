@@ -36,8 +36,6 @@
 (add-hook 'before-save-hook 'hwang:before-save-hook)
 
 ;; Gobal Key Bindings
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "C-'") 'magit-status)

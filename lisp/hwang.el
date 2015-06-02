@@ -35,15 +35,12 @@
 (load "semantic/loaddefs.el")
 (semantic-mode 1)
 
-(require 'mods/ido)
-(require 'smex)
-(smex-initialize)
+(require 'mods/completion)
 
 (require 'undo-tree)
 (global-undo-tree-mode)
 
 (require 'dired+)
-(require 'gnus)
 (require 'diff-mode-)
 (require 'pastebin)
 (require 'clips-mode)

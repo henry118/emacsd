@@ -1,6 +1,7 @@
 ;;
 ;; Gnus newsgroup setup
 ;;
+(require 'gnus)
 (require 'nnir)
 
 (setq gnus-select-method '(nnnil))
