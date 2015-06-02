@@ -50,7 +50,7 @@
   (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "C-<tab>") 'hs-toggle-hiding)
   (local-set-key (kbd "M-o")   'ff-find-other-file)
-  (local-set-key (kbd "M-m")   'eassist-list-methods)
+  (local-set-key (kbd "M-m")   'helm-semantic-or-imenu)
   (local-set-key (kbd "M-P")   'compile)
   (local-set-key (kbd "M-p")   'recompile)
   (local-set-key (kbd "M-.")   'helm-cscope-find-global-definition)

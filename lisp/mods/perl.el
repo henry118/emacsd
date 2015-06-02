@@ -10,7 +10,7 @@
  ;(setq cursor-type 'bar)
   (require 'perl-completion)
   (perl-completion-mode t)
-  (local-set-key (kbd "M-m")  'idomenu)
+  (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   )
 
 (add-hook 'cperl-mode-hook 'hwang:cperl-mode-hook)

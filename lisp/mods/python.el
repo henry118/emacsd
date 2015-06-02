@@ -13,7 +13,7 @@
  ;(setq cursor-type 'bar)
   (define-key jedi-mode-map (kbd "<C-tab>") nil)
   (hs-minor-mode t)
-  (local-set-key (kbd "M-m") 'idomenu)
+  (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   (local-set-key (kbd "C-<tab>") 'hs-toggle-hiding)
   (local-set-key (kbd "M-.") 'jedi:goto-definition)
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker)

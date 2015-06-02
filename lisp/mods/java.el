@@ -23,7 +23,7 @@
   (local-set-key (kbd "C-c p") 'malabar-visit-project-file)
   (local-set-key (kbd "C-c a") 'malabar-fully-qualified-class-name-kill-ring-save)
   (local-set-key (kbd "C-c ?") 'semantic-ia-complete-symbol-menu)
-  (local-set-key (kbd "M-m") 'eassist-list-methods)
+  (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   )
 
 (add-hook 'malabar-mode-hook 'hwang:java-hook)

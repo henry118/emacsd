@@ -8,7 +8,7 @@
  ;(setq cursor-type 'bar)
   (hs-minor-mode t)
   (hwang:imenu)
-  (local-set-key (kbd "M-m")   'idomenu)
+  (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   (local-set-key (kbd "C-<tab>") 'hs-toggle-hiding)
 )
 
