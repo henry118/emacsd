@@ -41,6 +41,8 @@
     helm
     helm-cscope
     undo-tree
+    paredit
+    rainbow-delimiters
     php-mode
     ;;malabar-mode
     ;;csharp-mode
