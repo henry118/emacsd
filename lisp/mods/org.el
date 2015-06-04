@@ -4,6 +4,7 @@
 
 (setq org-directory "~/org")
 (setq org-src-fontify-natively t)
+(define-key global-map "\C-cc" 'org-capture)
 
 (defun hwang-journal-file-name ()
   (let ((day (format-time-string "%Y-%m")))
