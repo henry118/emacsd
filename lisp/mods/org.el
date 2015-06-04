@@ -28,6 +28,8 @@
     "* %?\nEntered on %U\n  %i\n  %a")
    ("k" "Networking" entry (file+headline (hwang-journal-file-name) "Network")
     "* %?\nEntered on %U\n  %i\n  %a")
+   ("e" "Emacs" entry (file+headline (hwang-journal-file-name) "Emacs")
+    "* %?\nEntered on %U\n  %i\n  %a")
    ("k" "Graphics" entry (file+headline (hwang-journal-file-name) "Graphics")
     "* %?\nEntered on %U\n  %i\n  %a")
    ("w" "Windows" entry (file+headline (hwang-journal-file-name) "Windows")
