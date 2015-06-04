@@ -5,6 +5,7 @@
 (setq org-directory "~/org")
 (setq org-src-fontify-natively t)
 (define-key global-map "\C-cc" 'org-capture)
+(setq org-agenda-files '("~/org/"))
 
 (defun hwang-journal-file-name ()
   (let ((day (format-time-string "%Y-%m")))
@@ -31,7 +32,7 @@
     "* %?\nEntered on %U\n  %i\n  %a")
    ("e" "Emacs" entry (file+headline (hwang-journal-file-name) "Emacs")
     "* %?\nEntered on %U\n  %i\n  %a")
-   ("k" "Graphics" entry (file+headline (hwang-journal-file-name) "Graphics")
+   ("a" "Graphics" entry (file+headline (hwang-journal-file-name) "Graphics")
     "* %?\nEntered on %U\n  %i\n  %a")
    ("w" "Windows" entry (file+headline (hwang-journal-file-name) "Windows")
     "* %?\nEntered on %U\n  %i\n  %a")
