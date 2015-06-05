@@ -39,4 +39,17 @@
    )
  )
 
+;; adding more file extensions to org-mode
+(setq
+ auto-mode-alist
+ (append
+  '(("\\.\\(todo\\|text\\)\\'" . org-mode))
+  auto-mode-alist))
+
+;; provide my own customization for org-mode
+(defun hwang:org-mode-hook ()
+  (flyspell-mode)
+  )
+(add-hook 'org-mode-hook 'hwang:org-mode-hook)
+
 (provide 'mods/org)
