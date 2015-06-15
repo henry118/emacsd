@@ -55,7 +55,7 @@
   (local-set-key (kbd "M-p")   'recompile)
   (local-set-key (kbd "M-.")   'helm-cscope-find-global-definition)
   (local-set-key (kbd "M-,")   'helm-cscope-pop-mark)
-  (local-set-key (kbd "C-.")   'helm-cscope-find-functions-calling-this-function)
+  (local-set-key (kbd "C-.")   'helm-cscope-find-calling-this-funtcion)
   (local-set-key (kbd "C-,")   'helm-cscope-find-this-symbol)
   )
 (add-hook 'c-mode-common-hook 'hwang:cmode-hook)
