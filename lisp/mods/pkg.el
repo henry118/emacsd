@@ -51,6 +51,8 @@
     skewer-mode
     js2-mode
     ac-js2
+    go-mode
+    go-autocomplete
     ))
 
 (defun hwang:bootstrap ()
