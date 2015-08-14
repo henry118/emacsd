@@ -8,6 +8,7 @@
 
 (defun hwang:go-mode-hook()
   (hwang:imenu)
+  (setq tab-width 4)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (local-set-key (kbd "M-.") 'godef-jump)
   (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
