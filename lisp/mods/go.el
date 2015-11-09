@@ -11,7 +11,7 @@
   (setq tab-width 4)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (local-set-key (kbd "M-.") 'godef-jump)
-  (local-set-key (kbd "M-,") 'pop-global-mark)
+  (local-set-key (kbd "M-,") 'pop-tag-mark)
   (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   ; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
