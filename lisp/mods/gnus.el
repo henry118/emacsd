@@ -6,14 +6,10 @@
 
 (setq gnus-select-method '(nnnil))
 
-(setq gnus-secondary-select-methods '((nntp "news.gwene.org")))
-
 (setq
  user-full-name "Henry Wang"
  user-mail-address "henry118@gmail.com"
  )
-
-(setq smtpmail-auth-credentials "~/.authinfo")
 
 (setq
  gnus-posting-styles
@@ -24,24 +20,14 @@
 
 (add-to-list
  'gnus-secondary-select-methods
- '(nnimap
-   "gmail"
-   (nnimap-address "imap.gmail.com")
-   (nnimap-server-port 993)
-   (nnimap-stream ssl)
-   (nnir-search-engine imap)
-   (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
-   (nnmail-expiry-wait 90)
-   )
+ '(nnmaildir ""
+             (directory "~/.maildir/")
+             (directory-files nnheader-directory-files-safe)
+             (get-new-mail nil))
  )
 
 (setq
- message-send-mail-function 'smtpmail-send-it
- smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
- smtpmail-auth-credentials '(("smtp.gmail.com" 587 "henry118@gmail.com" nil))
- smtpmail-default-smtp-server "smtp.gmail.com"
- smtpmail-smtp-server "smtp.gmail.com"
- smtpmail-smtp-service 587
+ message-send-mail-function 'message-send-mail-with-sendmail
  )
 
 (setq-default
