@@ -18,13 +18,35 @@
     )
    ))
 
+;;== the following uses /maildir/ backend, but we can't do splitting
+;; (add-to-list
+;;  'gnus-secondary-select-methods
+;;  '(nnmaildir ""
+;;              (directory "~/.maildir/")
+;;              (directory-files nnheader-directory-files-safe)
+;;              (get-new-mail nil))
+;;  )
+;;
+;;== the following uses /maildir/ mail source, so we can do splitting now
 (add-to-list
  'gnus-secondary-select-methods
- '(nnmaildir ""
-             (directory "~/.maildir/")
-             (directory-files nnheader-directory-files-safe)
-             (get-new-mail nil))
+ '(nnml "")
  )
+
+(add-to-list
+ 'mail-sources
+ '(maildir :path "~/.maildir/inbox/")
+ )
+
+(setq
+ nnmail-split-methods 'nnmail-split-fancy
+ nnmail-split-fancy
+ `(| (to "henry118@gmail.com" "mail.gmail")
+     (to "wh_henry@hotmail.com" "mail.outlook")
+     (to "wh_henry@outlook.com" "mail.outlook")
+     "mail.spam")
+ )
+;;===
 
 (setq
  message-send-mail-function 'message-send-mail-with-sendmail
