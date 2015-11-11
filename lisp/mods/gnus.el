@@ -30,6 +30,17 @@
  message-send-mail-function 'message-send-mail-with-sendmail
  )
 
+(cond
+ ((executable-find "esmtp")
+  (setq sendmail-program (executable-find "esmtp")))
+ ((executable-find "msmtp")
+  (progn
+    (setq sendmail-program (executable-find "msmtp"))
+    (setq message-sendmail-f-is-evil 't)
+    (setq message-sendmail-extra-arguments '("--read-envelope-from"))
+    ))
+ )
+
 (setq-default
  gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
