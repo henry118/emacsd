@@ -53,6 +53,9 @@
     ac-js2
     go-mode
     go-autocomplete
+    s
+    request
+    jabber
     ))
 
 (defun hwang:bootstrap ()
