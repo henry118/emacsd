@@ -41,11 +41,11 @@
 (setq
  nnmail-split-methods 'nnmail-split-fancy
  nnmail-split-fancy
- `(| (to "henry118@gmail.com" "mail.gmail")
-     (to "wh_henry@hotmail.com" "mail.outlook")
-     (to "wh_henry@outlook.com" "mail.outlook")
-     (to "henry.wang@citrix.com" "mail.work")
-     "mail.spam")
+ `(| (to ".*henry118@gmail\\.com.*" "mail.gmail")
+     (to ".*wh_henry@hotmail\\.com.*" "mail.outlook")
+     (to ".*wh_henry@outlook\\.com.*" "mail.outlook")
+     (to ".*[Cc][Ii][Tt][Rr][Ii][Xx]" "mail.work")
+     "mail.other")
  )
 ;;===
 
