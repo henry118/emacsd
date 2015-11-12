@@ -62,3 +62,4 @@
 (require 'mods/xml)
 (require 'mods/org)
 (require 'mods/gnus)
+(require 'mods/bbdb)
