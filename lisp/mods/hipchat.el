@@ -7,6 +7,7 @@
 (require 'request)
 (require 'seq)
 (require 'jabber)
+(require 'json)
 
 (defvar hipchat--user-info-for-completion nil)
 
