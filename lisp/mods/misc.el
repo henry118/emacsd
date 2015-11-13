@@ -69,6 +69,6 @@
 (setq tramp-default-method "ssh")
 
 ;; Turn on EPA by default
-;(epa-file-enable)
+(epa-file-enable)
 
 (provide 'mods/misc)
