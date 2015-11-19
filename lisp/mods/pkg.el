@@ -54,6 +54,7 @@
     go-mode
     go-autocomplete
     s
+    seq
     request
     jabber
     pinentry
