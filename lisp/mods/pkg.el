@@ -58,6 +58,7 @@
     request
     jabber
     pinentry
+    ecb
     ))
 
 (defun hwang:bootstrap ()
