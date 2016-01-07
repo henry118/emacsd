@@ -24,8 +24,8 @@
     paths)
   )
 
-(when (or (is-unix) (is-cygwin))
-  (setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
+;(when (or (is-unix) (is-cygwin))
+(setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path)))
 
 (defun hwang:include (path)
   "Append project local include directories to clang completion"
