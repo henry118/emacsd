@@ -24,6 +24,7 @@
   '(auto-complete
     auto-complete-clang
     auto-complete-nxml
+    auto-complete-auctex
     dired+
     switch-window
     clips-mode
@@ -59,6 +60,7 @@
     jabber
     pinentry
     ecb
+    auctex
     ))
 
 (defun hwang:bootstrap ()

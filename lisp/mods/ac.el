@@ -5,6 +5,7 @@
 (require 'auto-complete-config)
 (require 'auto-complete-clang)
 (require 'auto-complete-nxml)
+(require 'auto-complete-auctex)
 
 (ac-config-default)
 

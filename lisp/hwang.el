@@ -65,3 +65,4 @@
 (require 'mods/bbdb)
 (require 'mods/hipchat)
 (require 'mods/ecb)
+(require 'mods/tex)
