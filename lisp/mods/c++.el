@@ -41,6 +41,7 @@
 
 (defun hwang:cmode-hook()
   (hs-minor-mode t)
+  (rainbow-delimiters-mode)
  ;(imenu-add-to-menubar "Imenu")
   (doxymacs-mode)
   (setq ac-sources (append '(ac-source-clang) ac-sources))
