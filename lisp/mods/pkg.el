@@ -40,7 +40,8 @@
     ;;flx-ido
     ;;smex
     helm
-    helm-cscope
+    ;;helm-cscope
+    helm-gtags
     undo-tree
     paredit
     rainbow-delimiters

@@ -24,8 +24,8 @@
     paths)
   )
 
-;(when (or (is-unix) (is-cygwin))
-(setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path)))
+(when (not (is-win))
+  (setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
 
 (defun hwang:include (path)
   "Append project local include directories to clang completion"
@@ -45,18 +45,27 @@
   (doxymacs-mode)
   (setq ac-sources (append '(ac-source-clang) ac-sources))
  ;(setq cursor-type 'bar)
-  (require 'xcscope)
-  (setq cscope-do-not-update-database t)
   (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "C-<tab>") 'hs-toggle-hiding)
   (local-set-key (kbd "M-o")   'ff-find-other-file)
   (local-set-key (kbd "M-m")   'helm-semantic-or-imenu)
   (local-set-key (kbd "M-P")   'compile)
   (local-set-key (kbd "M-p")   'recompile)
-  (local-set-key (kbd "M-.")   'helm-cscope-find-global-definition)
-  (local-set-key (kbd "M-,")   'helm-cscope-pop-mark)
-  (local-set-key (kbd "C-.")   'helm-cscope-find-calling-this-funtcion)
-  (local-set-key (kbd "C-,")   'helm-cscope-find-this-symbol)
+  (local-set-key (kbd "M-.")   'helm-gtags-find-tag)
+  (local-set-key (kbd "M-,")   'helm-gtags-pop-stack)
+  (local-set-key (kbd "C-.")   'helm-gtags-find-rtag)
+  (local-set-key (kbd "C-,")   'helm-gtags-find-pattern)
+  (local-set-key (kbd "C-c i") 'helm-gtags-create-tags)
+  (local-set-key (kbd "C-c u") 'helm-gtags-update-tags)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; CSCOPE Features
+  ;;(require 'xcscope)
+  ;;(setq cscope-do-not-update-database t)
+  ;;(local-set-key (kbd "M-.")   'helm-cscope-find-global-definition)
+  ;;(local-set-key (kbd "M-,")   'helm-cscope-pop-mark)
+  ;;(local-set-key (kbd "C-.")   'helm-cscope-find-calling-this-funtcion)
+  ;;(local-set-key (kbd "C-,")   'helm-cscope-find-this-symbol)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )
 (add-hook 'c-mode-common-hook 'hwang:cmode-hook)
 

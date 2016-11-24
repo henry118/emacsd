@@ -26,8 +26,8 @@
 (when (is-win)
   (add-to-list 'load-path "~/.emacs.d/lisp/windows")
   (add-to-list 'load-path "~/.emacs.d/lisp/windows/erlmode")
-  (setenv "PATH" (concat "c:\\cygwin\\bin;" (getenv "PATH")))
-  (setq exec-path (append exec-path '("~/.emacs.d/lisp/windows/bin" "c:/cygwin/bin"))))
+  ;(setenv "PATH" (concat "c:\\cygwin\\bin;" (getenv "PATH")))
+  (setq exec-path (append exec-path '("~/.emacs.d/lisp/windows/bin" "~/.emacs.d/lisp/windows/global/bin"))))
 
 (when (is-cygwin)
   (add-to-list 'load-path "~/.emacs.d/lisp/windows")
