@@ -70,6 +70,11 @@
   )
 (add-hook 'c-mode-common-hook 'hwang:cmode-hook)
 
+(defun hwang:cmode-before-save-hook()
+  (helm-gtags-update-tags)
+)
+(add-hook 'before-save-hook 'hwang:cmode-before-save-hook)
+
 (setq
  auto-mode-alist
  (append
