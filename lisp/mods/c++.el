@@ -38,6 +38,29 @@
         (append ac-clang-flags
                 (mapcar (lambda (item)(concat "-I" item)) paths))))
 
+(defun hwang:cpp-header-template ()
+  "Populate an empty c/c++ header file with my template"
+  (interactive)
+  (let* ((cpp-header '("h" "hpp"))
+         (is-header (member-ignore-case (file-name-extension (buffer-file-name)) cpp-header)))
+    (if (and is-header (= (buffer-size) 0))
+        (let* ((header-file-name (upcase (file-relative-name (buffer-file-name))))
+               (hashdef (format "__%s__" (replace-regexp-in-string "\\." "_" header-file-name))))
+          (save-excursion
+            (goto-char (point-min))
+            (insert (format "#ifndef %s\n" hashdef))
+            (insert (format "#define %s\n" hashdef))
+            (insert "\n")
+            (insert "#ifdef __cplusplus\n")
+            (insert "extern \"C\" {\n")
+            (insert "#endif\n")
+            (insert "\n\n")
+            (insert "#ifdef __cplusplus\n")
+            (insert "}\n")
+            (insert "#endif\n")
+            (insert "\n")
+            (insert (format "#endif // %s\n" hashdef))))))
+  )
 
 (defun hwang:cmode-hook()
   (hs-minor-mode t)
@@ -67,6 +90,7 @@
   ;;(local-set-key (kbd "C-.")   'helm-cscope-find-calling-this-funtcion)
   ;;(local-set-key (kbd "C-,")   'helm-cscope-find-this-symbol)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (hwang:cpp-header-template)
   )
 (add-hook 'c-mode-common-hook 'hwang:cmode-hook)
 
