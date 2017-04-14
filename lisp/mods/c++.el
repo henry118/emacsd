@@ -95,7 +95,8 @@
 (add-hook 'c-mode-common-hook 'hwang:cmode-hook)
 
 (defun hwang:cmode-before-save-hook()
-  (helm-gtags-update-tags)
+  (if (member major-mode '(c-mode c++-mode))
+      (helm-gtags-update-tags))
 )
 (add-hook 'before-save-hook 'hwang:cmode-before-save-hook)
 
