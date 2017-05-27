@@ -62,6 +62,7 @@
     pinentry
     ecb
     auctex
+    yaml-mode
     ))
 
 (defun hwang:bootstrap ()
