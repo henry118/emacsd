@@ -63,6 +63,7 @@
     ecb
     auctex
     yaml-mode
+    powershell
     ))
 
 (defun hwang:bootstrap ()
