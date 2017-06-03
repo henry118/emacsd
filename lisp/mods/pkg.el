@@ -64,6 +64,7 @@
     auctex
     yaml-mode
     powershell
+    graphviz-dot-mode
     ))
 
 (defun hwang:bootstrap ()
