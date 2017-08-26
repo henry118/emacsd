@@ -27,6 +27,8 @@
 (when (not (is-win))
   (setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
 
+(setq ac-clang-flags (add-to-list 'ac-clang-flags "-std=c++11" t))
+
 (defun hwang:include (path)
   "Append project local include directories to clang completion"
   (interactive (list (read-directory-name "Path: ")) )
