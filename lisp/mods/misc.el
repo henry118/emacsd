@@ -70,5 +70,6 @@
 
 ;; Turn on EPA by default
 (epa-file-enable)
+(setq epa-pinentry-mode 'loopback)
 
 (provide 'mods/misc)
