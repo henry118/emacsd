@@ -25,7 +25,7 @@
     auto-complete-clang
     auto-complete-nxml
     auto-complete-auctex
-    dired+
+    ;;dired+
     switch-window
     clips-mode
     markdown-mode

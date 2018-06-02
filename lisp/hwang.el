@@ -39,7 +39,7 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 
-(require 'dired+)
+;;(require 'dired+)
 (require 'diff-mode-)
 (require 'pastebin)
 ;;(require 'clips-mode)
