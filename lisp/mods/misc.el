@@ -9,7 +9,7 @@
    (quote
     ((substatement-open . 0)
      (case-label . +)
-     (innamespace . 0)
+     (innamespace . 4)
      (arglist-intro . +)
      (arglist-close . 0))))
  '(cua-mode t nil (cua-base))
