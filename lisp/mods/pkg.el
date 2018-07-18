@@ -65,6 +65,8 @@
     yaml-mode
     powershell
     graphviz-dot-mode
+    robe
+    projectile
     ))
 
 (defun hwang:bootstrap ()

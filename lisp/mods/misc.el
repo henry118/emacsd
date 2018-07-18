@@ -72,4 +72,9 @@
 (epa-file-enable)
 (setq epa-pinentry-mode 'loopback)
 
+;; Projectile
+(projectile-global-mode)
+(setq projectile-project-search-path '("~/devel/"))
+(setq projectile-enable-caching t)
+
 (provide 'mods/misc)

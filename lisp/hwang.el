@@ -66,3 +66,4 @@
 ;;(require 'mods/hipchat)
 ;;(require 'mods/ecb)
 (require 'mods/tex)
+(require 'mods/ruby)
