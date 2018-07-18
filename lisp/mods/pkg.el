@@ -67,6 +67,7 @@
     graphviz-dot-mode
     robe
     projectile
+    helm-projectile
     ))
 
 (defun hwang:bootstrap ()
