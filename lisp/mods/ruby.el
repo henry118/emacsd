@@ -7,6 +7,7 @@
 
 (defun hwang:ruby-mode-hook()
   (robe-mode)
+  (ac-robe-setup)
   (setq tab-width 2)
 )
 
