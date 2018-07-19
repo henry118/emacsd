@@ -21,7 +21,7 @@
   (add-to-list 'load-path "~/.emacs.d/lisp/macintosh")
   (add-to-list 'load-path "~/.emacs.d/lisp/erlmode")
   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/texbin"))
-  (setq exec-path (append exec-path '("/usr/local/bin"))))
+  (setq exec-path (append '("/usr/local/bin") exec-path)))
 
 (when (is-win)
   (add-to-list 'load-path "~/.emacs.d/lisp/windows")
