@@ -67,3 +67,4 @@
 ;;(require 'mods/ecb)
 (require 'mods/tex)
 (require 'mods/ruby)
+(require 'mods/plantuml)

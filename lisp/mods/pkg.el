@@ -68,6 +68,7 @@
     robe
     projectile
     helm-projectile
+    plantuml-mode
     ))
 
 (defun hwang:bootstrap ()
