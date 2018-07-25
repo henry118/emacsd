@@ -54,7 +54,7 @@
 (require 'mods/cmake)
 ;;(require 'mods/java)
 ;;(require 'mods/csharp)
-;;(require 'mods/js)
+(require 'mods/js)
 ;;(require 'mods/go)
 (require 'mods/eshell)
 ;;(require 'mods/lua)
