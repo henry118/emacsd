@@ -68,3 +68,4 @@
 (require 'mods/tex)
 (require 'mods/ruby)
 (require 'mods/plantuml)
+(require 'mods/mediawiki)

@@ -69,6 +69,7 @@
     projectile
     helm-projectile
     plantuml-mode
+    mediawiki
     ))
 
 (defun hwang:bootstrap ()
