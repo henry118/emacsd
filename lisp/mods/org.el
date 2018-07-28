@@ -34,7 +34,7 @@
     "* %?\n  Entered on %U\n  %i\n  %a")
    ("m" "Mac" entry (file+headline "~/org/journal.org" "Mac")
     "* %?\n  Entered on %U\n  %i\n  %a")
-   ("o" "Work" entry (file+headline "~/org/journal.org" "Work")
+   ("o" "Work" entry (file "~/org/work.org")
     "* %?\n  Entered on %U\n  %i\n  %a")
    )
  )
