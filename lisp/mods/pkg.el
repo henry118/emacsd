@@ -70,6 +70,7 @@
     helm-projectile
     plantuml-mode
     mediawiki
+    protobuf-mode
     ))
 
 (defun hwang:bootstrap ()
