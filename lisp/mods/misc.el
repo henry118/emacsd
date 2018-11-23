@@ -44,10 +44,12 @@
 (when (is-mac)
   (global-set-key (kbd "<home>") 'beginning-of-line)
   (global-set-key (kbd "<end>") 'end-of-line)
+  (global-set-key (kbd "<mouse-4>") '(lambda () (interactive) (scroll-down 2)))
+  (global-set-key (kbd "<mouse-5>") '(lambda () (interactive) (scroll-up 2)))
 )
 
 ;; Quick window switch
-(windmove-default-keybindings 'meta)
+;;(windmove-default-keybindings 'meta)
 
 ;; Language environmenet to UTF-8
 (set-language-environment 'UTF-8)
