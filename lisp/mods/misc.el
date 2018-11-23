@@ -60,7 +60,8 @@
 (tool-bar-mode 0)
 
 ;; Who use the bar to scroll?
-(scroll-bar-mode 0)
+(when (display-graphic-p)
+  (scroll-bar-mode 0))
 
 ;; Keep quiet
 ;(setq visible-bell t)
