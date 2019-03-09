@@ -9,6 +9,7 @@
 
 (ac-config-default)
 
+;;(ac-set-trigger-key "TAB")
 (setq ac-auto-start nil)
 
 (setq ac-quick-help-delay 0.5)
