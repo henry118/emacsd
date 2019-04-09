@@ -71,6 +71,7 @@
     plantuml-mode
     mediawiki
     protobuf-mode
+    lua-mode
     ))
 
 (defun hwang:bootstrap ()
