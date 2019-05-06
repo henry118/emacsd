@@ -72,6 +72,7 @@
     mediawiki
     protobuf-mode
     lua-mode
+    tabbar
     ))
 
 (defun hwang:bootstrap ()
