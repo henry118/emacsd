@@ -97,4 +97,9 @@
   ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
+;; Customize minimap
+(minimap-mode)
+(setq minimap-window-location 'right)
+(setq minimap-width-fraction 0.01)
+
 (provide 'mods/misc)

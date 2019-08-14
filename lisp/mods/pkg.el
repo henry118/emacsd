@@ -73,6 +73,9 @@
     protobuf-mode
     lua-mode
     tabbar
+    minimap
+    rust-mode
+    cargo
     ))
 
 (defun hwang:bootstrap ()
