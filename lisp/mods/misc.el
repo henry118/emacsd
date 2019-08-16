@@ -98,7 +98,7 @@
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 
 ;; Customize minimap
-(minimap-mode)
+;(minimap-mode)
 (setq minimap-window-location 'right)
 (setq minimap-width-fraction 0.01)
 
