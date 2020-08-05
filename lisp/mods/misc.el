@@ -12,7 +12,7 @@
      (innamespace . 4)
      (arglist-intro . +)
      (arglist-close . 0))))
- ;'(cua-mode t nil (cua-base))
+ '(cua-mode t nil (cua-base))
  '(display-time-day-and-date t)
  '(display-time-mode t)
  '(gdb-find-source-frame t)
