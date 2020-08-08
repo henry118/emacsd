@@ -69,3 +69,4 @@
 (require 'mods/ruby)
 (require 'mods/plantuml)
 (require 'mods/mediawiki)
+(require 'mods/rust)
