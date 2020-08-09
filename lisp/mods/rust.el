@@ -13,6 +13,11 @@
 
 (require 'rust-mode)
 
+(when (is-mac)
+  (setenv "PATH" (concat (getenv "PATH") (expand-file-name "~/.cargo/bin")))
+  (setenv "RUST_SRC_PATH" (expand-file-name "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"))
+  (add-to-list 'exec-path (expand-file-name "~/.cargo/bin")))
+
 (setq rust-format-on-save t)
 
 (add-hook 'racer-mode-hook 'eldoc-mode)
