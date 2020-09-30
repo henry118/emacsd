@@ -102,4 +102,7 @@
 (setq minimap-window-location 'right)
 (setq minimap-width-fraction 0.01)
 
+;; We want double click to highlight words with '_'
+(global-superword-mode)
+
 (provide 'mods/misc)
