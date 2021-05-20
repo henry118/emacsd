@@ -3,9 +3,9 @@
 ;;
 
 (require 'auto-complete-config)
-(require 'auto-complete-clang)
-(require 'auto-complete-nxml)
-(require 'auto-complete-auctex)
+(require 'auto-complete-clang-async)
+;;(require 'auto-complete-nxml)
+;;(require 'auto-complete-auctex)
 
 (ac-config-default)
 
