@@ -7,11 +7,9 @@
 
 (require 'package)
 
-(package-initialize)
-
 (add-to-list
  'package-archives
- '("melpa" . "http://stable.melpa.org/packages/")
+ '("melpa" . "https://melpa.org/packages/")
  t)
 
 (when (< emacs-major-version 24)
@@ -19,20 +17,21 @@
    'package-archives
    '("gnu" . "http://elpa.gnu.org/packages/")))
 
+(package-initialize)
+
 ;; The following list contains the packages required for this setup
 (defvar hwang-bootstrap-packages
   '(auto-complete
     auto-complete-clang-async
-    ;;auto-complete-nxml
-    ;;auto-complete-auctex
-    ;;dired+
+    auto-complete-nxml
+    auto-complete-auctex
     switch-window
     clips-mode
     markdown-mode
     epc
     jedi
     ;;emms
-    ;;regex-tool
+    regex-tool
     magit
     iedit
     ;;idomenu
@@ -52,7 +51,7 @@
     ;;groovy-mode
     skewer-mode
     js2-mode
-    ;;ac-js2
+    ac-js2
     go-mode
     go-autocomplete
     s
@@ -60,7 +59,7 @@
     request
     ;;jabber
     pinentry
-    ;;ecb
+    ecb
     auctex
     yaml-mode
     powershell
