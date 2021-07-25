@@ -23,16 +23,15 @@
 (defvar hwang-bootstrap-packages
   '(auto-complete
     auto-complete-clang-async
-    ;;auto-complete-nxml
-    ;;auto-complete-auctex
-    ;;dired+
+    auto-complete-nxml
+    auto-complete-auctex
     switch-window
     clips-mode
     markdown-mode
     epc
     jedi
     ;;emms
-    ;;regex-tool
+    regex-tool
     magit
     iedit
     ;;idomenu
@@ -52,7 +51,7 @@
     ;;groovy-mode
     skewer-mode
     js2-mode
-    ;;ac-js2
+    ac-js2
     go-mode
     go-autocomplete
     s
@@ -60,7 +59,7 @@
     request
     ;;jabber
     pinentry
-    ;;ecb
+    ecb
     auctex
     yaml-mode
     powershell
