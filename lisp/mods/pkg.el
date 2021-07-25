@@ -7,17 +7,17 @@
 
 (require 'package)
 
-(package-initialize)
-
 (add-to-list
  'package-archives
- '("melpa" . "http://stable.melpa.org/packages/")
+ '("melpa" . "http://melpa.org/packages/")
  t)
 
 (when (< emacs-major-version 24)
   (add-to-list
    'package-archives
    '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(package-initialize)
 
 ;; The following list contains the packages required for this setup
 (defvar hwang-bootstrap-packages
