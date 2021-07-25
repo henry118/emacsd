@@ -4,16 +4,24 @@
 ;; Setup:
 ;;
 ;; export GOPATH = $HOME/.golang/
-;; go get -u github.com/nsf/gocode
-;; go get -u github.com/rogpeppe/godef
+;; GO111MODULE=on go get golang.org/x/tools/gopls@latest
 
-(require 'go-autocomplete)
+(require 'lsp-mode)
+
 (setq exec-path (append exec-path '("~/.golang/bin")))
+
+(add-hook 'go-mode-hook #'lsp-deferred)
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 (defun hwang:go-mode-hook()
   (hwang:imenu)
   (setq tab-width 4)
-  (add-hook 'before-save-hook 'gofmt-before-save)
 
   (local-set-key (kbd "M-.")   'helm-gtags-find-tag)
   (local-set-key (kbd "M-,")   'helm-gtags-pop-stack)

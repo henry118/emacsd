@@ -77,6 +77,7 @@
     cargo
     racer
     company
+    lsp-mode
     ))
 
 (defun hwang:bootstrap ()
