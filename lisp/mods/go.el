@@ -1,7 +1,11 @@
 ;;
 ;; Golang mode setup
 ;;
-
+;; Setup:
+;;
+;; export GOPATH = $HOME/.golang/
+;; go get -u github.com/nsf/gocode
+;; go get -u github.com/rogpeppe/godef
 
 (require 'go-autocomplete)
 (setq exec-path (append exec-path '("~/.golang/bin")))
