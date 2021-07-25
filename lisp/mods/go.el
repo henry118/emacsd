@@ -9,6 +9,8 @@
 (require 'lsp-mode)
 
 (setq exec-path (append exec-path '("~/.golang/bin")))
+(when (is-mac)
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/go/bin")))
 
 (add-hook 'go-mode-hook #'lsp-deferred)
 
