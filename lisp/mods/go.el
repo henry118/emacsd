@@ -29,7 +29,7 @@
   (local-set-key (kbd "M-.")   'xref-find-definitions)
   (local-set-key (kbd "M-,")   'pop-tag-mark)
   (local-set-key (kbd "C-,")   'xref-find-references)
-  (local-set-key (kbd "C-.")   'lsp-describe-thing-at-point)
+  (local-set-key (kbd "C-.")   'lsp-goto-implementation)
 
   (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   ; Customize compile command to run go build
