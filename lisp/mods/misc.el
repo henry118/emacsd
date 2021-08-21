@@ -105,4 +105,6 @@
 ;; We want double click to highlight words with '_'
 (global-superword-mode)
 
+(which-key-mode)
+
 (provide 'mods/misc)

@@ -41,6 +41,7 @@
     helm
     ;;helm-cscope
     helm-gtags
+    helm-lsp
     undo-tree
     paredit
     rainbow-delimiters
@@ -78,6 +79,8 @@
     racer
     company
     lsp-mode
+    lsp-ui
+    which-key
     ))
 
 (defun hwang:bootstrap ()

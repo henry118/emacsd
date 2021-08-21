@@ -24,12 +24,12 @@
 (defun hwang:go-mode-hook()
   (hwang:imenu)
   (setq tab-width 4)
+  (lsp-enable-which-key-integration)
 
   (local-set-key (kbd "M-.")   'xref-find-definitions)
   (local-set-key (kbd "M-,")   'pop-tag-mark)
   (local-set-key (kbd "C-,")   'xref-find-references)
-  (local-set-key (kbd "C-c i") 'helm-gtags-create-tags)
-  (local-set-key (kbd "C-c u") 'helm-gtags-update-tags)
+  (local-set-key (kbd "C-.")   'lsp-describe-thing-at-point)
 
   (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   ; Customize compile command to run go build
