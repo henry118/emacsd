@@ -8,7 +8,7 @@
 
 (require 'lsp-mode)
 
-(setq exec-path (append exec-path '("~/.golang/bin")))
+(setq exec-path (append exec-path '("~/devel/golang/bin")))
 (when (is-mac)
   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/go/bin")))
 
@@ -25,15 +25,11 @@
   (hwang:imenu)
   (setq tab-width 4)
 
-  (local-set-key (kbd "M-.")   'helm-gtags-find-tag)
-  (local-set-key (kbd "M-,")   'helm-gtags-pop-stack)
-  (local-set-key (kbd "C-.")   'helm-gtags-find-rtag)
-  (local-set-key (kbd "C-,")   'helm-gtags-find-pattern)
+  (local-set-key (kbd "M-.")   'xref-find-definitions)
+  (local-set-key (kbd "M-,")   'pop-tag-mark)
+  (local-set-key (kbd "C-,")   'xref-find-references)
   (local-set-key (kbd "C-c i") 'helm-gtags-create-tags)
   (local-set-key (kbd "C-c u") 'helm-gtags-update-tags)
-
-  ;(local-set-key (kbd "M-.") 'godef-jump)
-  ;(local-set-key (kbd "M-,") 'pop-tag-mark)
 
   (local-set-key (kbd "M-m") 'helm-semantic-or-imenu)
   ; Customize compile command to run go build
