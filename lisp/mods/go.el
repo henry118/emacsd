@@ -26,7 +26,7 @@
   (setq tab-width 2)
   (lsp-enable-which-key-integration)
 
-  (local-set-key (kbd "M-.")   'lsp-find-definitions)
+  (local-set-key (kbd "M-.")   'lsp-find-definition)
   (local-set-key (kbd "M-,")   'pop-tag-mark)
   (local-set-key (kbd "C-,")   'lsp-find-references)
   (local-set-key (kbd "C-.")   'lsp-goto-implementation)
