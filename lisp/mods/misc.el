@@ -20,7 +20,7 @@
  '(gdb-show-main t)
  '(gdb-speedbar-auto-raise t)
  '(gdb-use-separate-io-buffer t)
- '(global-linum-mode t)
+ ;;'(global-linum-mode t)
  '(indent-tabs-mode nil)
  '(make-backup-files nil)
  '(show-paren-mode t)
