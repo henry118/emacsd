@@ -8,9 +8,8 @@
 
 (require 'lsp-mode)
 
-(setq exec-path (append exec-path '("~/go/bin")))
-(when (is-mac)
-  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/go/bin")))
+(setq exec-path (append exec-path (list (format "%s/bin" (getenv "GOPATH")))))
+(setenv "PATH" (concat (getenv "PATH") (format ":%s/bin" (getenv "GOPATH"))))
 
 (add-hook 'go-mode-hook #'lsp-deferred)
 
