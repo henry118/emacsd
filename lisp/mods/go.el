@@ -29,7 +29,7 @@
   (local-set-key (kbd "M-,")   'pop-tag-mark)
   (local-set-key (kbd "C-,")   'lsp-find-references)
   (local-set-key (kbd "C-.")   'lsp-goto-implementation)
-  (local-set-key (kbd "M-m")   'lsp-ui-imenu)
+  (local-set-key (kbd "M-m")   'helm-semantic-or-imenu)
 
   ; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
