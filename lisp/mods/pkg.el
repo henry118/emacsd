@@ -21,10 +21,10 @@
 
 ;; The following list contains the packages required for this setup
 (defvar hwang-bootstrap-packages
-  '(auto-complete
-    auto-complete-clang-async
-    auto-complete-nxml
-    auto-complete-auctex
+  '(;;auto-complete
+    ;;auto-complete-clang-async
+    ;;auto-complete-nxml
+    ;;auto-complete-auctex
     switch-window
     clips-mode
     markdown-mode
@@ -40,7 +40,7 @@
     ;;smex
     helm
     ;;helm-cscope
-    helm-gtags
+    ;;helm-gtags
     helm-lsp
     undo-tree
     paredit
@@ -54,13 +54,11 @@
     js2-mode
     ac-js2
     go-mode
-    go-autocomplete
     s
     seq
     request
     ;;jabber
     pinentry
-    ecb
     auctex
     yaml-mode
     powershell
