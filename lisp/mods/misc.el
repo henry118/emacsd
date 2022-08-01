@@ -106,6 +106,6 @@
 (global-superword-mode)
 
 (which-key-mode)
-(yas-global-mode)
+;;(yas-global-mode)
 
 (provide 'mods/misc)
