@@ -22,6 +22,7 @@
 
 (defun hwang:go-mode-hook()
   (hwang:imenu)
+  (setq tab-width 4)
   (lsp-enable-which-key-integration)
 
   (local-set-key (kbd "M-.")   'lsp-find-definition)
