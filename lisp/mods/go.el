@@ -23,6 +23,8 @@
 (defun hwang:go-mode-hook()
   (hwang:imenu)
   (setq tab-width 2)
+  (setq lsp-enable-file-watchers 't)
+  (setq lsp-file-watch-threshold 10000)
   (lsp-enable-which-key-integration)
 
   (local-set-key (kbd "M-.")   'lsp-find-definition)
