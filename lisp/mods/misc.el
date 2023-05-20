@@ -108,4 +108,7 @@
 (which-key-mode)
 ;;(yas-global-mode)
 
+;; Get rid off the annoying *.~undo-tree~ files
+(setq undo-tree-auto-save-history nil)
+
 (provide 'mods/misc)
