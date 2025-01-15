@@ -21,8 +21,8 @@
 
 ;; The following list contains the packages required for this setup
 (defvar hwang-bootstrap-packages
-  '(;;auto-complete
-    ;;auto-complete-clang-async
+  '(auto-complete
+    auto-complete-clang-async
     ;;auto-complete-nxml
     ;;auto-complete-auctex
     switch-window
@@ -40,7 +40,7 @@
     ;;smex
     helm
     ;;helm-cscope
-    ;;helm-gtags
+    helm-gtags
     helm-lsp
     undo-tree
     paredit
