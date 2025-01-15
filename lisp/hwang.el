@@ -36,7 +36,7 @@
 (require 'mods/perl)
 (require 'mods/make)
 ;;(require 'mods/erlang)
-(require 'mods/cmake)
+;;(require 'mods/cmake)
 ;;(require 'mods/java)
 ;;(require 'mods/csharp)
 (require 'mods/js)

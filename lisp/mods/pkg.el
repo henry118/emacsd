@@ -24,6 +24,7 @@
 (defvar hwang-bootstrap-packages
   '(auto-complete
     auto-complete-clang
+    auto-complete-clang-async
     ;;auto-complete-nxml
     ;;auto-complete-auctex
     switch-window

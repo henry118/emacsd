@@ -26,7 +26,7 @@
  '(make-backup-files nil)
  '(show-paren-mode t)
  '(which-function-mode t)
- '(warning-minimum-level 'emergency)
+ '(warning-minimum-level :emergency)
  '(pastebin-api-dev-key (getenv "PASTEBIN_KEY"))
  )
 
