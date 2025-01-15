@@ -1,9 +1,8 @@
 ;;
 ;; C/C++ Settings
 ;;
-;;(require `clangd')
-;;
-
+;; (require 'clangd)
+(require 'auto-complete-clang)
 (require 'mods/utils)
 ;;(require 'lsp-mode)
 
@@ -32,7 +31,7 @@
 (when (not (is-win))
   (setq ac-clang-flags (mapcar (lambda (item)(concat "-I" item)) (hwang:g++-include-path))))
 
-(setq ac-clang-flags (add-to-list 'ac-clang-flags "-std=c++11" t))
+;;(setq ac-clang-flags (add-to-list 'ac-clang-flags "-std=c++11" t))
 
 (defun hwang:include (path)
   "Append project local include directories to clang completion"
@@ -70,12 +69,13 @@
   )
 
 (defun hwang:cmode-hook()
+  (setq tab-width 4)
   (hs-minor-mode t)
   (rainbow-delimiters-mode)
   ;(lsp-enable-which-key-integration)
   (doxymacs-mode)
   (hwang:cpp-header-template)
-  ;(setq ac-sources (append '(ac-source-clang) ac-sources))
+  (setq ac-sources (append '(ac-source-clang) ac-sources))
   ;(setq cursor-type 'bar)
   (local-set-key (kbd "C-c m") 'hwang:imenu)
   (local-set-key (kbd "C-<tab>") 'hs-toggle-hiding)

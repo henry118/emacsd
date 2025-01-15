@@ -18,11 +18,12 @@
    '("gnu" . "http://elpa.gnu.org/packages/")))
 
 (package-initialize)
+(setq package-check-signature nil)
 
 ;; The following list contains the packages required for this setup
 (defvar hwang-bootstrap-packages
   '(auto-complete
-    auto-complete-clang-async
+    auto-complete-clang
     ;;auto-complete-nxml
     ;;auto-complete-auctex
     switch-window
