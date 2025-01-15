@@ -3,7 +3,7 @@
 ;;
 
 (custom-set-variables
- ;'(browse-url-browser-function (quote w3m-browse-url))
+ ;;'(browse-url-browser-function (quote w3m-browse-url))
  '(c-basic-offset 4)
  '(c-offsets-alist
    (quote
@@ -20,8 +20,7 @@
  '(gdb-show-main t)
  '(gdb-speedbar-auto-raise t)
  '(gdb-use-separate-io-buffer t)
- '(linum-format " %d  ")
- '(global-linum-mode t)
+ '(global-display-line-numbers-mode t)
  '(indent-tabs-mode nil)
  '(make-backup-files nil)
  '(show-paren-mode t)
